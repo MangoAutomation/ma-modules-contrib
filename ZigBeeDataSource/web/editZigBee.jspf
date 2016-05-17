@@ -1,0 +1,23 @@
+<%--
+    Copyright (C) 2016 Infinite Automation Systems Inc. All rights reserved.
+    @author Terry Packer
+--%><%@ include file="/WEB-INF/jsp/include/tech.jsp"%>
+
+<script type="text/javascript">
+
+</script>
+
+<tag:pollingDataSourceAttrs descriptionKey="dsEdit.zigbee.desc" helpId="zigbee-ds">
+</tag:pollingDataSourceAttrs>
+
+<tag:pointList pointHelpId="zigbee-pp">
+  <tr>
+    <td class="formLabelRequired"><fmt:message key="dsEdit.settable"/></td>
+    <td class="formField"><input type="checkbox" id="settable"/></td>
+  </tr>
+
+  <tr>
+    <td class="formLabelRequired"><fmt:message key="dsEdit.pointDataType"/></td>
+    <td class="formField"><tag:dataTypeOptions id="dataTypeId" onchange="changeDataType();" excludeImage="true"/></td>
+  </tr>
+</tag:pointList>
