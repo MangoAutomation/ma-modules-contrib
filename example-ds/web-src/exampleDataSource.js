@@ -55,7 +55,7 @@ const examplePollingDataSourceModule = angular.module('maExamplePollingDataSourc
 
     maPointProvider.registerType({
         type: 'EXAMPLE_POLLING',
-        description: 'example.datapoint.description=',
+        description: 'example.datapoint.description',
         template: `<ma-example-data-point-editor data-point="$ctrl.dataPoint"></ma-example-data-point-editor>`
     });
     maUiMenuProvider.registerMenuItems([
