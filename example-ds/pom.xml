@@ -11,6 +11,55 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>exampleDataSource</name>
 	<description>Example data source for learning the Mango programming api</description>
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<id>ias-snapshots</id>
+			<name>Mango Dependencies</name>
+			<url>https://maven.mangoautomation.net/repository/ias-snapshot/</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>ias-releases</id>
+			<name>Mango Dependencies</name>
+			<url>https://maven.mangoautomation.net/repository/ias-release/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>ias-snapshots</id>
+			<name>Mango Dependencies</name>
+			<url>https://maven.mangoautomation.net/repository/ias-snapshot/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>ias-releases</id>
+			<name>Mango Dependencies</name>
+			<url>https://maven.mangoautomation.net/repository/ias-release/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
