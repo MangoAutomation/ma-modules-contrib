@@ -76,7 +76,7 @@ describe('Example data source ', function() {
         });
       });
     
-    it('Delete virtual data source', () => {
+    it('Delete example data source', () => {
         return client.restRequest({
             path: `/rest/v2/data-sources/${ds.xid}`,
             method: 'DELETE',
