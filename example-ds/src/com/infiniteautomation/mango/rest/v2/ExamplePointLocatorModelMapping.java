@@ -6,15 +6,14 @@ package com.infiniteautomation.mango.rest.v2;
 import org.springframework.stereotype.Component;
 
 import com.infiniteautomation.mango.example.vo.ExamplePointLocatorVO;
-import com.infiniteautomation.mango.rest.v1.model.ExamplePointLocatorModel;
+import com.infiniteautomation.mango.rest.v2.model.ExamplePointLocatorModel;
 import com.infiniteautomation.mango.rest.v2.model.RestModelJacksonMapping;
 import com.infiniteautomation.mango.rest.v2.model.RestModelMapper;
-import com.serotonin.m2m2.vo.User;
+import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
 
 /**
- * This class is used for the v2 Model Mapper but replicates the 
- * functionality of the v1 mapper exactly
+ * This class is used to map the VO to and from a REST Model
  * @author Terry Packer
  *
  */
@@ -32,7 +31,7 @@ public class ExamplePointLocatorModelMapping implements RestModelJacksonMapping<
     }
 
     @Override
-    public ExamplePointLocatorModel map(Object from, User user, RestModelMapper mapper) {
+    public ExamplePointLocatorModel map(Object from, PermissionHolder user, RestModelMapper mapper) {
         return new ExamplePointLocatorModel((ExamplePointLocatorVO)from);
     }
 
