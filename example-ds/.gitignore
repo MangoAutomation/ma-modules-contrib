@@ -1,3 +1,5 @@
 /maven-target/
 /node/
 /web/
+/.classpath
+/.project
