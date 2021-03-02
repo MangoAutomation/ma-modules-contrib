@@ -1,11 +1,11 @@
 /**
  * Copyright (C) 2019  Terry Packer. All rights reserved.
  */
-package com.infiniteautomation.mango.rest.v2.model;
+package com.infiniteautomation.mango.rest.latest.model;
 
 import com.infiniteautomation.mango.example.ExamplePollingDataSourceDefinition;
 import com.infiniteautomation.mango.example.vo.ExamplePollingDataSourceVO;
-import com.infiniteautomation.mango.rest.v2.model.datasource.AbstractPollingDataSourceModel;
+import com.infiniteautomation.mango.rest.latest.model.datasource.AbstractPollingDataSourceModel;
 
 /**
  * @author Terry Packer

@@ -5,9 +5,7 @@ package com.infiniteautomation.mango.example;
 
 import com.infiniteautomation.mango.example.vo.ExamplePollingDataSourceVO;
 import com.serotonin.m2m2.i18n.ProcessResult;
-import com.serotonin.m2m2.module.ModuleRegistry;
 import com.serotonin.m2m2.module.PollingDataSourceDefinition;
-import com.serotonin.m2m2.module.license.DataSourceTypePointsLimit;
 import com.serotonin.m2m2.vo.DataPointVO;
 import com.serotonin.m2m2.vo.dataSource.DataSourceVO;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
@@ -25,8 +23,7 @@ public class ExamplePollingDataSourceDefinition extends PollingDataSourceDefinit
      */
     @Override
     public void preInitialize() {
-        //Here we add a restriction that says if this module is unlicensed, you can only create 2 points
-        ModuleRegistry.addLicenseEnforcement(new DataSourceTypePointsLimit(getModule().getName(), TYPE_NAME, 2, null));
+
     }
 
     /*
@@ -58,7 +55,7 @@ public class ExamplePollingDataSourceDefinition extends PollingDataSourceDefinit
      */
     @Override
     public void validate(ProcessResult response, ExamplePollingDataSourceVO ds, PermissionHolder user) {
-        DataSourceTypePointsLimit.checkLimit(ExamplePollingDataSourceDefinition.TYPE_NAME, response);
+
     }
 
     /**
@@ -66,14 +63,10 @@ public class ExamplePollingDataSourceDefinition extends PollingDataSourceDefinit
      */
     @Override
     public void validate(ProcessResult response, DataPointVO dpvo, DataSourceVO dsvo, PermissionHolder user) {
-
         //Ensure the data point should belong to this type of data source
         if (!(dsvo instanceof ExamplePollingDataSourceVO)) {
             response.addContextualMessage("dataSourceId", "dpEdit.validate.invalidDataSourceType");
         }
-
-        //Check the licensing limits, if the response has any problems the data source cannot be saved
-        DataSourceTypePointsLimit.checkLimit(ExamplePollingDataSourceDefinition.TYPE_NAME, response);
     }
 
 

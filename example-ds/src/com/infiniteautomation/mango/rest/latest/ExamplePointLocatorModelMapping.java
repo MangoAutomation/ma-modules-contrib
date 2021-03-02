@@ -1,14 +1,14 @@
 /**
  * Copyright (C) 2019  Terry Packer. All rights reserved.
  */
-package com.infiniteautomation.mango.rest.v2;
+package com.infiniteautomation.mango.rest.latest;
 
 import org.springframework.stereotype.Component;
 
 import com.infiniteautomation.mango.example.vo.ExamplePointLocatorVO;
-import com.infiniteautomation.mango.rest.v2.model.ExamplePointLocatorModel;
-import com.infiniteautomation.mango.rest.v2.model.RestModelJacksonMapping;
-import com.infiniteautomation.mango.rest.v2.model.RestModelMapper;
+import com.infiniteautomation.mango.rest.latest.model.RestModelJacksonMapping;
+import com.infiniteautomation.mango.rest.latest.model.RestModelMapper;
+import com.infiniteautomation.mango.rest.latest.model.ExamplePointLocatorModel;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
 

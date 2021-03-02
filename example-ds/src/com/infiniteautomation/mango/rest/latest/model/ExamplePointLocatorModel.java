@@ -1,10 +1,10 @@
 /**
  * Copyright (C) 2019  Infinite Automation Software. All rights reserved.
  */
-package com.infiniteautomation.mango.rest.v2.model;
+package com.infiniteautomation.mango.rest.latest.model;
 
 import com.infiniteautomation.mango.example.vo.ExamplePointLocatorVO;
-import com.infiniteautomation.mango.rest.v2.model.dataPoint.AbstractPointLocatorModel;
+import com.infiniteautomation.mango.rest.latest.model.dataPoint.AbstractPointLocatorModel;
 
 /**
  * @author Terry Packer
