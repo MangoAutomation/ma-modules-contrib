@@ -1,1 +1,18 @@
-/.project
+# Eclipse settings
+.project
+.settings
+
+# IntelliJ settings
+*.iml
+.idea
+
+# Maven settings
+maven-target/
+
+# General ignores
+.classpath
+.settings
+.project
+web/angular
+node_modules/
+node/

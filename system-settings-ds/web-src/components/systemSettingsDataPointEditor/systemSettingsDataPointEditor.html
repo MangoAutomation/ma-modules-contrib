@@ -1,0 +1,41 @@
+<h3>
+    <span ma-tr="systemSettings.datapoint.description"></span>
+    <md-button class="md-icon-button ma-small-button ma-no-margin" ui-sref="ui.help.systemSettingsDataPoint">
+        <md-icon>help</md-icon>
+    </md-button>
+</h3>
+
+<div layout="row" layout-wrap layout-align="space-between start" class="ma-inputs-container">
+    <div flex="100" flex-gt-md="50">
+        <md-checkbox ma-flatten-values="false" class="ma-margin-input-container" name="settable" ng-model="$ctrl.dataPoint.pointLocator.settable">
+            <span ma-tr="dsEdit.settable"></span>
+        </md-checkbox>
+    </div>
+
+    <md-input-container flex="100" flex-gt-md="50">
+        <md-icon>storage</md-icon>
+        <label ma-tr="systemSettings.dataPoint.settingKey"></label>
+        <input name="pointLocator.settingKey" ng-model="$ctrl.dataPoint.pointLocator.settingKey" required ma-get-ctrl="settingKeyModelCtrl = $ngModel">
+        <div ng-messages="settingKeyModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="settingKeyModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex="100" flex-gt-md="50">
+        <md-icon>storage</md-icon>
+        <label ma-tr="systemSettings.dataPoint.settingType"></label>
+        <md-select name="pointLocator.settingType" ng-model="$ctrl.dataPoint.pointLocator.settingType" ng-change="$ctrl.settingTypeChanged()" required ma-get-ctrl="settingTypeModelCtrl = $ngModel">
+            <md-option ng-if="$ctrl.dataPoint.pointLocator.settingType.hasMultipleValues()" ng-value="$ctrl.dataPoint.pointLocator.settingType">
+                <em ng-bind="$ctrl.dataPoint.pointLocator.settingType"></em>
+            </md-option>
+            <md-option value="INTEGER" ma-tr="systemSettings.dataPoint.settingType.integer"></md-option>
+            <md-option value="STRING" ma-tr="systemSettings.dataPoint.settingType.string"></md-option>
+            <md-option value="BOOLEAN" ma-tr="systemSettings.dataPoint.settingType.boolean"></md-option>
+        </md-select>
+        <div ng-messages="settingTypeModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="settingTypeModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+</div>

@@ -1,0 +1,49 @@
+<h3>
+    <span ma-tr="systemSettings.datasource.description"></span>
+    <md-button class="md-icon-button ma-small-button ma-no-margin" ui-sref="ui.help.systemSettingsPollingDataSource">
+        <md-icon>help</md-icon>
+    </md-button>
+</h3>
+
+<!-- This is where the inputs would go -->
+<div layout="row" layout-wrap layout-align="space-between start" class="ma-inputs-container">
+    <md-input-container flex="100" flex-gt-md="50">
+        <md-icon>http</md-icon>
+        <label ma-tr="systemSettings.dataSource.url"></label>
+        <input name="url" ng-model="$ctrl.dataSource.url" required ma-get-ctrl="urlModelCtrl = $ngModel">
+        <div ng-messages="urlModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="urlModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex="100" flex-gt-md="50">
+        <md-icon>http</md-icon>
+        <label ma-tr="systemSettings.dataSource.token"></label>
+        <input name="token" ng-model="$ctrl.dataSource.token" required ma-get-ctrl="tokenModelCtrl = $ngModel">
+        <div ng-messages="tokenModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="tokenModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex="100" flex-gt-md="50" >
+        <md-icon>timer</md-icon>
+        <label ma-tr="systemSettings.dataSource.timeoutMs"></label>
+        <input name="timeoutMs" type="number" ng-model="$ctrl.dataSource.timeoutMs" required ma-get-ctrl="timeoutMsModelCtrl = $ngModel">
+        <div ng-messages="timeoutMsModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="timeoutMsModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex="100" flex-gt-md="50" >
+        <md-icon>timer</md-icon>
+        <label ma-tr="systemSettings.dataSource.retries"></label>
+        <input name="retries" type="number" ng-model="$ctrl.dataSource.retries" required ma-get-ctrl="retriesMsModelCtrl = $ngModel">
+        <div ng-messages="retriesMsModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="retriesMsModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+</div>

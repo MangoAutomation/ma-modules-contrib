@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "@infinite-automation/systemSettingsDataSource",
+  "version": "4.0.0-SNAPSHOT",
+  "description": "Example data source for learning the Mango programming api to make http requests for Mango system settings\n\t\tand process them",
+  "main": "web/angular/systemSettingsDataSource.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@infinite-automation/mango-client": "^0.6.0",
+    "@infinite-automation/mango-module-tools": "~1.2.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "tmp": "^0.0.33"
+  },
+  "scripts": {
+    "webpack": "webpack --config webpack.config.js"
+  },
+  "author": "Terry Packer <terry@infiniteautomation.com>",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infiniteautomation/mango-modules-contrib.git"
+  },
+  "com_infiniteautomation": {
+    "moduleName": "systemSettingsDataSource"
+  }
+}
