@@ -36,6 +36,7 @@ const systemSettingsDataSourceModule = angular.module('maSystemSettingsDataSourc
             },
             eventAlarmLevels: [
                 {eventType: 'POLL_ABORTED', level: 'URGENT', duplicateHandling: 'IGNORE', descriptionKey: 'event.ds.pollAborted'}
+                {eventType: 'DATA_SOURCE_EXCEPTION', level: 'URGENT', duplicateHandling: 'IGNORE', descriptionKey: 'systemSettings.dataSource.exceptionEventName'}
             ],
             quantize: false,
             useCron: false,

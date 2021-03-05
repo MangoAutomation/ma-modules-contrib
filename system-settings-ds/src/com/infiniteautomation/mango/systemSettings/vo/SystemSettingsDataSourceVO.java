@@ -30,6 +30,7 @@ public class SystemSettingsDataSourceVO extends PollingDataSourceVO {
     private static final ExportCodes EVENT_CODES = new ExportCodes();
     static {
         EVENT_CODES.addElement(SystemSettingsDataSourceRT.POLL_ABORTED_EVENT, POLL_ABORTED);
+        EVENT_CODES.addElement(SystemSettingsDataSourceRT.DATA_SOURCE_EXCEPTION, "DATA_SOURCE_EXCEPTION");
     }
 
     @JsonProperty

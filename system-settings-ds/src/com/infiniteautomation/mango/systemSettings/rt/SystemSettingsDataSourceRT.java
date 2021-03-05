@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infiniteautomation.mango.spring.MangoRuntimeContextConfiguration;
 import com.infiniteautomation.mango.systemSettings.vo.SystemSettingsDataSourceVO;
 import com.serotonin.m2m2.Common;
+import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataImage.DataPointRT;
 import com.serotonin.m2m2.rt.dataImage.PointValueTime;
 import com.serotonin.m2m2.rt.dataImage.SetPointSource;
@@ -40,10 +41,12 @@ public class SystemSettingsDataSourceRT extends PollingDataSource<SystemSettings
 
     //Events that can be generated
     public static final int POLL_ABORTED_EVENT = 1;
+    public static final int DATA_SOURCE_EXCEPTION = 2;
 
     private final ObjectMapper mapper;
     private HttpClient client;
     private HttpGet request;
+    private boolean failed;
 
     public SystemSettingsDataSourceRT(SystemSettingsDataSourceVO vo) {
         super(vo);
@@ -71,11 +74,28 @@ public class SystemSettingsDataSourceRT extends PollingDataSource<SystemSettings
                 HttpContext localContext = new BasicHttpContext();
                 localContext.setAttribute("TIMESTAMP", scheduledPollTime);
                 client.execute(this.request, this, localContext);
+
+                //Only RTN active events for performance, we won't get here if an exception is thrown
+                if(failed) {
+                    failed = false;
+                    returnToNormal(DATA_SOURCE_EXCEPTION, System.currentTimeMillis());
+
+                    //All good, set points to reliable
+                    for(DataPointRT dprt : dataPoints) {
+                        dprt.setAttribute(ATTR_UNRELIABLE_KEY, false);
+                    }
+                }
             }catch(IOException e) {
+                failed = true;
                 if(LOG.isDebugEnabled()) {
                     LOG.debug("Error making request.", e);
                 }
-                //TODO wire in request failed event type
+                raiseEvent(DATA_SOURCE_EXCEPTION, scheduledPollTime, true, new TranslatableMessage(
+                        "systemSettings.dataSource.exceptionEvent", e.getMessage()));
+                //Set all data points to be unreliable
+                for(DataPointRT dprt : dataPoints) {
+                    dprt.setAttribute(ATTR_UNRELIABLE_KEY, true);
+                }
             }
         }
     }
