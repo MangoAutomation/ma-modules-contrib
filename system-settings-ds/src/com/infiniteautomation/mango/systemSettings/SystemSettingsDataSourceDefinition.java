@@ -3,7 +3,12 @@
  */
 package com.infiniteautomation.mango.systemSettings;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.infiniteautomation.mango.systemSettings.vo.SystemSettingsDataSourceVO;
+import com.infiniteautomation.mango.systemSettings.vo.SystemSettingsPointLocatorVO;
+import com.serotonin.m2m2.db.dao.SystemSettingsDao;
 import com.serotonin.m2m2.i18n.ProcessResult;
 import com.serotonin.m2m2.module.PollingDataSourceDefinition;
 import com.serotonin.m2m2.vo.DataPointVO;
@@ -17,6 +22,9 @@ import com.serotonin.m2m2.vo.permission.PermissionHolder;
 public class SystemSettingsDataSourceDefinition extends PollingDataSourceDefinition<SystemSettingsDataSourceVO> {
 
     public static final String TYPE_NAME = "EXAMPLE_SYSTEM_SETTINGS";
+
+    @Autowired
+    private SystemSettingsDao systemSettingsDao;
 
     /*
      * One of the lifecycle hooks we can use to initialize and configure our module
@@ -56,6 +64,24 @@ public class SystemSettingsDataSourceDefinition extends PollingDataSourceDefinit
     @Override
     public void validate(ProcessResult response, SystemSettingsDataSourceVO ds, PermissionHolder user) {
 
+        //TODO Validate URL points to something real?
+
+        if(StringUtils.isEmpty(ds.getUrl())) {
+            response.addContextualMessage("url", "validate.required");
+        }
+
+        if(StringUtils.isEmpty(ds.getToken())) {
+            response.addContextualMessage("token", "validate.required");
+        }
+
+        if(ds.getTimeoutMs() < 0) {
+            response.addContextualMessage("timeoutMs", "validate.greaterThan", 0);
+        }
+
+        if(ds.getRetries() < 0) {
+            response.addContextualMessage("retries", "validate.greaterThan", 0);
+        }
+
     }
 
     /**
@@ -66,6 +92,18 @@ public class SystemSettingsDataSourceDefinition extends PollingDataSourceDefinit
         //Ensure the data point should belong to this type of data source
         if (!(dsvo instanceof SystemSettingsDataSourceVO)) {
             response.addContextualMessage("dataSourceId", "dpEdit.validate.invalidDataSourceType");
+        }
+
+        SystemSettingsPointLocatorVO pl = dpvo.getPointLocator();
+
+        //validate that the setting exists, it may actually be set to null but that is very unlikely
+        if(systemSettingsDao.getValue(pl.getSettingKey()) == null) {
+            response.addContextualMessage("settingKey", "dpEdit.validate.invalidDataSourceType");
+        }
+
+        //validate that the type exists
+        if (!SystemSettingsPointLocatorVO.SETTING_TYPE_CODES.isValidId(pl.getSettingType())) {
+            response.addContextualMessage("settingType", "validate.invalidValue");
         }
     }
 
