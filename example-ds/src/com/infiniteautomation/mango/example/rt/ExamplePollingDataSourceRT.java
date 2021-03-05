@@ -3,6 +3,8 @@
  */
 package com.infiniteautomation.mango.example.rt;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,8 +35,16 @@ public class ExamplePollingDataSourceRT extends PollingDataSource<ExamplePolling
      */
     @Override
     protected void doPoll(long scheduledPollTime) {
-        // TODO Auto-generated method stub
-        
+        for(DataPointRT rt : dataPoints) {
+            ExamplePointLocatorRT plrt = rt.getPointLocator();
+            PointValueTime latestValue = null;
+            PointValueTime v = rt.getPointValue();
+            List<PointValueTime> latestValues = rt.getLatestPointValues(1);
+            if(latestValues.size() >= 1) {
+                latestValue = latestValues.get(0);
+            }
+            rt.updatePointValue(new PointValueTime(plrt.transform(latestValue), scheduledPollTime));
+        }
     }
 
     /*
@@ -43,7 +53,7 @@ public class ExamplePollingDataSourceRT extends PollingDataSource<ExamplePolling
      */
     @Override
     public void setPointValueImpl(DataPointRT dprt, PointValueTime valueToSet, SetPointSource source) {
-        
+        dprt.setPointValue(valueToSet, source);
     }
     
 }

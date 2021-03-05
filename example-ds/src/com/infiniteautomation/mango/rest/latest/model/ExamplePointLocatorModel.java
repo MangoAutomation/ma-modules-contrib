@@ -14,6 +14,8 @@ public class ExamplePointLocatorModel extends AbstractPointLocatorModel<ExampleP
 
     public static final String TYPE_NAME = "PL.EXAMPLE_POLLING";
 
+    private boolean increment;
+
     public ExamplePointLocatorModel() {
 
     }
@@ -35,6 +37,8 @@ public class ExamplePointLocatorModel extends AbstractPointLocatorModel<ExampleP
     @Override
     public ExamplePointLocatorVO toVO() {
         ExamplePointLocatorVO vo = new ExamplePointLocatorVO();
+        vo.setSettable(settable);
+        vo.setIncrement(increment);
         return vo;
     }
 
@@ -46,6 +50,15 @@ public class ExamplePointLocatorModel extends AbstractPointLocatorModel<ExampleP
     @Override
     public void fromVO(ExamplePointLocatorVO vo) {
         super.fromVO(vo);
+        increment = vo.isIncrement();
+    }
+
+    public boolean isIncrement() {
+        return increment;
+    }
+
+    public void setIncrement(boolean increment) {
+        this.increment = increment;
     }
 
 }

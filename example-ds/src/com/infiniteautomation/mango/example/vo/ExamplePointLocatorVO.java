@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 
 import com.infiniteautomation.mango.example.ExamplePollingDataSourceDefinition;
 import com.infiniteautomation.mango.example.rt.ExamplePointLocatorRT;
+import com.serotonin.json.spi.JsonProperty;
 import com.serotonin.m2m2.DataTypes;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataSource.PointLocatorRT;
@@ -22,6 +23,10 @@ import com.serotonin.m2m2.vo.dataSource.AbstractPointLocatorVO;
  */
 public class ExamplePointLocatorVO extends AbstractPointLocatorVO<ExamplePointLocatorVO> {
 
+    @JsonProperty
+    private boolean increment;
+    @JsonProperty
+    private boolean settable;
 
     /*
      * Used internally by Mango to create runtime instances of this
@@ -56,7 +61,19 @@ public class ExamplePointLocatorVO extends AbstractPointLocatorVO<ExamplePointLo
      */
     @Override
     public boolean isSettable() {
-        return false;
+        return settable;
+    }
+
+    public void setSettable(boolean settable) {
+        this.settable = settable;
+    }
+
+    public boolean isIncrement() {
+        return increment;
+    }
+
+    public void setIncrement(boolean increment) {
+        this.increment = increment;
     }
 
     /*
@@ -66,13 +83,22 @@ public class ExamplePointLocatorVO extends AbstractPointLocatorVO<ExamplePointLo
      * you can easily add/remove settings.
      */
     private static final long serialVersionUID = 1L;
-    private static final int version = 1;
+    private static final int version = 2;
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeInt(version);
+        out.writeBoolean(increment);
+        out.writeBoolean(settable);
     }
 
     private void readObject(ObjectInputStream in) throws IOException {
-        in.readInt();
+        int version = in.readInt();
+        if(version == 1) {
+            increment = true;
+            settable = true;
+        }else if(version == 2) {
+            increment = in.readBoolean();
+            settable = in.readBoolean();
+        }
     }
 
     @Override

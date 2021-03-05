@@ -44,6 +44,8 @@ const examplePollingDataSourceModule = angular.module('maExamplePollingDataSourc
         defaultDataPoint: {
             dataSourceTypeName: 'EXAMPLE_POLLING',
             pointLocator: {
+                settable: true,
+                increment: true,
                 dataType: 'NUMERIC',
                 modelType: 'PL.EXAMPLE_POLLING'
             }
