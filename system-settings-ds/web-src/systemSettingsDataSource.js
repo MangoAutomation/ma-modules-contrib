@@ -51,6 +51,7 @@ const systemSettingsDataSourceModule = angular.module('maSystemSettingsDataSourc
                 settable: false,
                 settingKey: '',
                 settingType: 'INTEGER',
+                dataType: 'MULTISTATE',
                 modelType: 'PL.EXAMPLE_SYSTEM_SETTINGS'
             }
         },
