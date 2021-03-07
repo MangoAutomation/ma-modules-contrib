@@ -75,7 +75,7 @@
     </div>
 
     <div flex="100" flex-gt-md="50">
-        <md-checkbox ma-flatten-values="false" class="ma-margin-input-container" name="settable" ng-model="$ctrl.dataPoint.pointLocator.showCurrencyUnit">
+        <md-checkbox ma-flatten-values="false" class="ma-margin-input-container" name="settable" ng-model="$ctrl.showCurrencyUnit" ng-change="$ctrl.setSuffix()">
             <span ma-tr="cc.datapoint.showUnit"></span>
         </md-checkbox>
     </div>

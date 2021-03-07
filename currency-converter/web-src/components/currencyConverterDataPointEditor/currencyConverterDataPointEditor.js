@@ -786,6 +786,7 @@ class CurrencyConverterDataPointEditorController {
     }
 
     $onInit() {
+        this.showCurrencyUnit = false;
         this.currencyList = CURRENCY_LIST;
         this.setInitCurrency();
     }
@@ -797,15 +798,21 @@ class CurrencyConverterDataPointEditorController {
         this.toCurrency = CURRENCY_LIST.find((currency) => currency.id === toCurrencyId);
 
         if (this.toCurrency) {
-            this.dataPoint.pointLocator.currencyUnit = this.toCurrency.currencySymbol || this.toCurrency.id
+            this.setSuffix()
         }
     }
 
     setToDp(setTo) {
         this.dataPoint.pointLocator[`${setTo}Id`] = this[setTo].id;
 
-        if (this.toCurrency) {
-            this.dataPoint.pointLocator.currencyUnit = this.toCurrency.currencySymbol || this.toCurrency.id
+        this.setSuffix();
+    }
+
+    setSuffix(){
+        if (this.showCurrencyUnit){
+            this.dataPoint.textRenderer.suffix = this.toCurrency.currencySymbol || this.toCurrency.id;
+        } else {
+            this.dataPoint.textRenderer.suffix = this.toCurrency.id;
         }
     }
 }

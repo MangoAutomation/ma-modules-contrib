@@ -15,8 +15,6 @@ public class CurrencyConverterPointLocatorModel extends AbstractPointLocatorMode
     public static final String TYPE_NAME = "PL.CURRENCY_CONVERT";
 
     private double initialValue;
-    private boolean showCurrencyUnit;
-    private String currencyUnit;
     private String fromCurrencyId;
     private String toCurrencyId;
 
@@ -39,22 +37,6 @@ public class CurrencyConverterPointLocatorModel extends AbstractPointLocatorMode
 
     public void setInitialValue(double initialValue) {
         this.initialValue = initialValue;
-    }
-
-    public boolean isShowCurrencyUnit() {
-        return showCurrencyUnit;
-    }
-
-    public void setShowCurrencyUnit(boolean showCurrencyUnit) {
-        this.showCurrencyUnit = showCurrencyUnit;
-    }
-
-    public String getCurrencyUnit() {
-        return currencyUnit;
-    }
-
-    public void setCurrencyUnit(String currencyUnit) {
-        this.currencyUnit = currencyUnit;
     }
 
     public String getFromCurrencyId() {
@@ -83,8 +65,6 @@ public class CurrencyConverterPointLocatorModel extends AbstractPointLocatorMode
         CurrencyConverterPointLocatorVO vo = new CurrencyConverterPointLocatorVO();
         vo.setSettable(settable);
         vo.setInitialValue(initialValue);
-        vo.setShowCurrencyUnit(showCurrencyUnit);
-        vo.setCurrencyUnit(currencyUnit);
         vo.setFromCurrencyId(fromCurrencyId);
         vo.setToCurrencyId(toCurrencyId);
         return vo;
@@ -99,8 +79,6 @@ public class CurrencyConverterPointLocatorModel extends AbstractPointLocatorMode
     public void fromVO(CurrencyConverterPointLocatorVO vo) {
         super.fromVO(vo);
         initialValue = vo.getInitialValue();
-        showCurrencyUnit = vo.isShowCurrencyUnit();
-        currencyUnit = vo.getCurrencyUnit();
         fromCurrencyId = vo.getFromCurrencyId();
         toCurrencyId = vo.getToCurrencyId();
     }

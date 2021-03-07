@@ -5,6 +5,7 @@ package com.infiniteautomation.mango.currencyConverter.rt;
 
 import com.infiniteautomation.mango.currencyConverter.vo.CurrencyConverterDataSourceVO;
 import com.posadskiy.currencyconverter.CurrencyConverter;
+import com.posadskiy.currencyconverter.config.ConfigBuilder;
 import com.serotonin.m2m2.rt.dataImage.DataPointRT;
 import com.serotonin.m2m2.rt.dataImage.PointValueTime;
 import com.serotonin.m2m2.rt.dataImage.SetPointSource;
@@ -22,8 +23,6 @@ public class CurrencyConverterDataSourceRT extends PollingDataSource<CurrencyCon
 
     //Events that can be generated
     public static final int POLL_ABORTED_EVENT = 1;
-
-    private CurrencyConverter converter;
     
     public CurrencyConverterDataSourceRT(CurrencyConverterDataSourceVO vo) {
         super(vo);
@@ -32,12 +31,6 @@ public class CurrencyConverterDataSourceRT extends PollingDataSource<CurrencyCon
     @Override
     public void initialize() {
         super.initialize();
-//        String CURRENCY_CONVERTER_API_API_KEY = vo.getApiKey();
-//        this.converter = new CurrencyConverter(
-//                new ConfigBuilder()
-//                        .currencyConverterApiApiKey(CURRENCY_CONVERTER_API_API_KEY)
-//                        .build()
-//        );
     }
 
     /*
@@ -47,7 +40,20 @@ public class CurrencyConverterDataSourceRT extends PollingDataSource<CurrencyCon
     @Override
     protected void doPoll(long scheduledPollTime) {
         // TODO Auto-generated method stub
-        
+        if (dataPoints.size() > 0) {
+            String CURRENCY_CONVERTER_API_API_KEY = vo.getApiKey();
+            CurrencyConverter converter = new CurrencyConverter(
+                    new ConfigBuilder()
+                            .currencyConverterApiApiKey(CURRENCY_CONVERTER_API_API_KEY)
+                            .build()
+            );
+
+            for (DataPointRT dprt : dataPoints) {
+                CurrencyConverterPointLocatorRT plrt = dprt.getPointLocator();
+
+                dprt.updatePointValue(new PointValueTime(plrt.convertRate(converter), scheduledPollTime));
+            }
+        }
     }
 
     /*
@@ -56,7 +62,7 @@ public class CurrencyConverterDataSourceRT extends PollingDataSource<CurrencyCon
      */
     @Override
     public void setPointValueImpl(DataPointRT dprt, PointValueTime valueToSet, SetPointSource source) {
-        
+        dprt.setPointValue(valueToSet, source);
     }
     
 }

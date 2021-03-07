@@ -29,10 +29,6 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
     @JsonProperty
     private double initialValue = 1;
     @JsonProperty
-    private boolean showCurrencyUnit;
-    @JsonProperty
-    private String currencyUnit = "";
-    @JsonProperty
     private String fromCurrencyId = "";
     @JsonProperty
     private String toCurrencyId = "";
@@ -83,22 +79,6 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
         this.initialValue = initialValue;
     }
 
-    public boolean isShowCurrencyUnit() {
-        return showCurrencyUnit;
-    }
-
-    public void setShowCurrencyUnit(boolean showCurrencyUnit) {
-        this.showCurrencyUnit = showCurrencyUnit;
-    }
-
-    public String getCurrencyUnit() {
-        return currencyUnit;
-    }
-
-    public void setCurrencyUnit(String currencyUnit) {
-        this.currencyUnit = currencyUnit;
-    }
-
     public String getFromCurrencyId() {
         return fromCurrencyId;
     }
@@ -126,8 +106,6 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeInt(version);
         out.writeDouble(initialValue);
-        out.writeBoolean(showCurrencyUnit);
-        SerializationHelper.writeSafeUTF(out, currencyUnit);
         SerializationHelper.writeSafeUTF(out, fromCurrencyId);
         SerializationHelper.writeSafeUTF(out, toCurrencyId);
     }
@@ -136,8 +114,6 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
         int version = in.readInt();
         if(version == 1) {
             initialValue = in.readDouble();
-            showCurrencyUnit = in.readBoolean();
-            currencyUnit  = SerializationHelper.readSafeUTF(in);
             fromCurrencyId = SerializationHelper.readSafeUTF(in);
             toCurrencyId = SerializationHelper.readSafeUTF(in);
         }

@@ -44,7 +44,7 @@ const currencyConverterModule = angular
                     ],
                     quantize: false,
                     useCron: false,
-                    apiKey: '',
+                    apiKey: '86b1d7ec8911522e59fe',
                     modelType: 'CURRENCY_CONVERT'
                 },
                 defaultDataPoint: {
@@ -54,8 +54,6 @@ const currencyConverterModule = angular
                         modelType: 'PL.CURRENCY_CONVERT',
                         settable: false,
                         initialValue: 1,
-                        showCurrencyUnit: false,
-                        currencyUnit: '',
                         fromCurrencyId: 'USD',
                         toCurrencyId: ''
                     }
