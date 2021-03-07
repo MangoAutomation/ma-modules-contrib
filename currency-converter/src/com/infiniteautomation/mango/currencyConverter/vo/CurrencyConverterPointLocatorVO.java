@@ -27,15 +27,15 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
     @JsonProperty
     private boolean settable;
     @JsonProperty
-    private double initialValue;
+    private double initialValue = 1;
     @JsonProperty
     private boolean showCurrencyUnit;
     @JsonProperty
-    private String currencyUnit;
+    private String currencyUnit = "";
     @JsonProperty
-    private String fromCurrencyId;
+    private String fromCurrencyId = "";
     @JsonProperty
-    private String toCurrencyId;
+    private String toCurrencyId = "";
 
 
     /*
@@ -125,6 +125,7 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
     private static final int version = 1;
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeInt(version);
+        out.writeDouble(initialValue);
         out.writeBoolean(showCurrencyUnit);
         SerializationHelper.writeSafeUTF(out, currencyUnit);
         SerializationHelper.writeSafeUTF(out, fromCurrencyId);
