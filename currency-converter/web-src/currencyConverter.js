@@ -10,8 +10,8 @@ import dsHelpTemplate from './help/dsHelp.html';
 import dpHelpTemplate from './help/dpHelp.html';
 
 const currencyConverterModule = angular.module('maExamplePollingDataSourceModule', ['maUiApp'])
-.component('maExamplePollingDataSourceEditor', currencyConverterDataSourceEditor)
-.component('maExampleDataPointEditor', currencyConverterDataPointEditor)
+.component('maCurrencyConverterDataSourceEditor', currencyConverterDataSourceEditor)
+.component('maCurrencyConverterDataPointEditor', currencyConverterDataPointEditor)
 .config(['maDataSourceProvider', 'maPointProvider', 'maUiMenuProvider', function(maDataSourceProvider, maPointProvider, maUiMenuProvider) {
     maDataSourceProvider.registerType({
         type: 'CURRENCY_CONVERT',
@@ -39,6 +39,7 @@ const currencyConverterModule = angular.module('maExamplePollingDataSourceModule
             ],
             quantize: false,
             useCron: false,
+            apiKey: '',
             modelType: 'CURRENCY_CONVERT'
         },
         defaultDataPoint: {

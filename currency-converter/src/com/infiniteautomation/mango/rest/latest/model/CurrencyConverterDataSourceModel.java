@@ -11,13 +11,15 @@ import com.infiniteautomation.mango.rest.latest.model.datasource.AbstractPolling
  * @author Pier Puccini
  *
  */
-public class CurrencyConverterPollingDataSourceModel extends AbstractPollingDataSourceModel<CurrencyConverterDataSourceVO>{
+public class CurrencyConverterDataSourceModel extends AbstractPollingDataSourceModel<CurrencyConverterDataSourceVO>{
 
-    public CurrencyConverterPollingDataSourceModel() {
+    private String apiKey;
+
+    public CurrencyConverterDataSourceModel() {
         super();
     }
     
-    public CurrencyConverterPollingDataSourceModel(CurrencyConverterDataSourceVO data) {
+    public CurrencyConverterDataSourceModel(CurrencyConverterDataSourceVO data) {
         fromVO(data);
     }
 
@@ -29,11 +31,21 @@ public class CurrencyConverterPollingDataSourceModel extends AbstractPollingData
     @Override
     public CurrencyConverterDataSourceVO toVO() {
         CurrencyConverterDataSourceVO vo = super.toVO();
+        vo.setApiKey(apiKey);
         return vo;
     }
     
     @Override
     public void fromVO(CurrencyConverterDataSourceVO vo) {
         super.fromVO(vo);
+        this.apiKey = vo.getApiKey();
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 }

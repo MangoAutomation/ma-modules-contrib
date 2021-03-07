@@ -12,7 +12,7 @@ import com.infiniteautomation.mango.rest.latest.model.dataPoint.AbstractPointLoc
  */
 public class CurrencyConverterPointLocatorModel extends AbstractPointLocatorModel<CurrencyConverterPointLocatorVO> {
 
-    public static final String TYPE_NAME = "PL.EXAMPLE_POLLING";
+    public static final String TYPE_NAME = "PL.CURRENCY_CONVERT";
 
     public CurrencyConverterPointLocatorModel() {
 
