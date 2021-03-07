@@ -5,10 +5,12 @@ package com.infiniteautomation.mango.currencyConverter.vo;
 
 import com.infiniteautomation.mango.currencyConverter.CurrencyConverterDataSourceDefinition;
 import com.infiniteautomation.mango.currencyConverter.rt.CurrencyConverterPointLocatorRT;
+import com.serotonin.json.spi.JsonProperty;
 import com.serotonin.m2m2.DataTypes;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataSource.PointLocatorRT;
 import com.serotonin.m2m2.vo.dataSource.AbstractPointLocatorVO;
+import com.serotonin.util.SerializationHelper;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,6 +23,19 @@ import java.io.ObjectOutputStream;
  *
  */
 public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<CurrencyConverterPointLocatorVO> {
+
+    @JsonProperty
+    private boolean settable;
+    @JsonProperty
+    private double initialValue;
+    @JsonProperty
+    private boolean showCurrencyUnit;
+    @JsonProperty
+    private String currencyUnit;
+    @JsonProperty
+    private String fromCurrencyId;
+    @JsonProperty
+    private String toCurrencyId;
 
 
     /*
@@ -50,13 +65,54 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
         return DataTypes.NUMERIC;
     }
 
-    /*
-     * Can this point's value be set.
-     *  (Can be configurable or hard coded based on implementation)
-     */
     @Override
     public boolean isSettable() {
-        return false;
+        return settable;
+    }
+
+    public void setSettable(boolean settable) {
+        this.settable = settable;
+    }
+
+
+    public double getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(double initialValue) {
+        this.initialValue = initialValue;
+    }
+
+    public boolean isShowCurrencyUnit() {
+        return showCurrencyUnit;
+    }
+
+    public void setShowCurrencyUnit(boolean showCurrencyUnit) {
+        this.showCurrencyUnit = showCurrencyUnit;
+    }
+
+    public String getCurrencyUnit() {
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(String currencyUnit) {
+        this.currencyUnit = currencyUnit;
+    }
+
+    public String getFromCurrencyId() {
+        return fromCurrencyId;
+    }
+
+    public void setFromCurrencyId(String fromCurrencyId) {
+        this.fromCurrencyId = fromCurrencyId;
+    }
+
+    public String getToCurrencyId() {
+        return toCurrencyId;
+    }
+
+    public void setToCurrencyId(String toCurrencyId) {
+        this.toCurrencyId = toCurrencyId;
     }
 
     /*
@@ -69,10 +125,21 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
     private static final int version = 1;
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeInt(version);
+        out.writeBoolean(showCurrencyUnit);
+        SerializationHelper.writeSafeUTF(out, currencyUnit);
+        SerializationHelper.writeSafeUTF(out, fromCurrencyId);
+        SerializationHelper.writeSafeUTF(out, toCurrencyId);
     }
 
     private void readObject(ObjectInputStream in) throws IOException {
-        in.readInt();
+        int version = in.readInt();
+        if(version == 1) {
+            initialValue = in.readDouble();
+            showCurrencyUnit = in.readBoolean();
+            currencyUnit  = SerializationHelper.readSafeUTF(in);
+            fromCurrencyId = SerializationHelper.readSafeUTF(in);
+            toCurrencyId = SerializationHelper.readSafeUTF(in);
+        }
     }
 
     @Override
