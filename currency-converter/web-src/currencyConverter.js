@@ -54,6 +54,8 @@ const currencyConverterModule = angular
                         modelType: 'PL.CURRENCY_CONVERT',
                         settable: false,
                         initialValue: 1,
+                        showCurrencyUnit: false,
+                        currencyUnit: '',
                         fromCurrencyId: 'USD',
                         toCurrencyId: ''
                     }

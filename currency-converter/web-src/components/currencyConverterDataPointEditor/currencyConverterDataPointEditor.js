@@ -795,10 +795,18 @@ class CurrencyConverterDataPointEditorController {
 
         this.fromCurrency = CURRENCY_LIST.find((currency) => currency.id === fromCurrencyId);
         this.toCurrency = CURRENCY_LIST.find((currency) => currency.id === toCurrencyId);
+
+        if (this.toCurrency) {
+            this.dataPoint.pointLocator.currencyUnit = this.toCurrency.currencySymbol || this.toCurrency.id
+        }
     }
 
     setToDp(setTo) {
         this.dataPoint.pointLocator[`${setTo}Id`] = this[setTo].id;
+
+        if (this.toCurrency) {
+            this.dataPoint.pointLocator.currencyUnit = this.toCurrency.currencySymbol || this.toCurrency.id
+        }
     }
 }
 
