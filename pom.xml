@@ -30,6 +30,7 @@
     <modules>
         <module>example-ds</module>
         <module>system-settings-ds</module>
+        <module>custom-sql-tables</module>
     </modules>
     <repositories>
         <repository>
