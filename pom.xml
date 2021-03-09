@@ -31,6 +31,7 @@
         <module>example-ds</module>
         <module>system-settings-ds</module>
         <module>currency-converter</module>
+        <module>custom-sql-tables</module>
     </modules>
     <repositories>
         <repository>
