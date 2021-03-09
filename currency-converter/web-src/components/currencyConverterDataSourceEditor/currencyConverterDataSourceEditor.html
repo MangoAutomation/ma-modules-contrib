@@ -1,0 +1,19 @@
+<h3>
+    <span ma-tr="cc.datasource.description"></span>
+    <md-button class="md-icon-button ma-small-button ma-no-margin" ui-sref="ui.help.currencyConverterDataSource">
+        <md-icon>help</md-icon>
+    </md-button>
+</h3>
+
+<!-- This is where the inputs would go -->
+<div layout="row" layout-wrap layout-align="space-between start" class="ma-inputs-container">
+    <md-input-container flex="100" flex-gt-md="50">
+        <md-icon>vpn_key</md-icon>
+        <label ma-tr="cc.datasource.apiKey"></label>
+        <input name="apiKey" ng-model="$ctrl.dataSource.apiKey" required ma-get-ctrl="apiKeyModelCtrl = $ngModel">
+        <div ng-messages="apiKeyModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="apiKeyModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+</div>

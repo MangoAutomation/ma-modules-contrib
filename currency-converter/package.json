@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "@infinite-automation/currencyConverter",
+  "version": "4.0.0-SNAPSHOT",
+  "description": "Currency converter data source, converts currencies based of their symbols",
+  "main": "web/angular/currencyConverter.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@infinite-automation/mango-client": "^0.6.0",
+    "@infinite-automation/mango-module-tools": "~1.2.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "tmp": "^0.0.33"
+  },
+  "scripts": {
+    "webpack": "webpack --config webpack.config.js"
+  },
+  "author": "Pier Puccini <pierpuccini@gmail.com>",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infiniteautomation/mango-modules-contrib.git"
+  },
+  "com_infiniteautomation": {
+    "moduleName": "currencyConverter"
+  }
+}
