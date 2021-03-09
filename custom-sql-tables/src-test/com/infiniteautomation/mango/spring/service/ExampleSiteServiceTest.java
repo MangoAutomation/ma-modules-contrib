@@ -9,6 +9,7 @@ package com.infiniteautomation.mango.spring.service;
 import java.util.Collections;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.infiniteautomation.mango.example.sqlTables.ExampleSiteCreatePermission;
@@ -24,6 +25,10 @@ import com.serotonin.m2m2.vo.role.Role;
 public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest<ExampleSiteVO,
         ExampleSitesRecord, ExampleSites, ExampleSiteDao, ExampleSiteService> {
 
+    @BeforeClass
+    public static void beforeClass() {
+        loadModules();
+    }
 
     @Override
     ExampleSiteService getService() {
