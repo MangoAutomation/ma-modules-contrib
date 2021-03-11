@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.infiniteautomation.mango.example.sqlTables.ExampleSiteCreatePermission;
+import com.infiniteautomation.mango.example.sqlTables.vo.ExampleAccessCardVO;
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleSiteVO;
 import com.infiniteautomation.mango.spring.dao.ExampleSiteDao;
 import com.serotonin.m2m2.i18n.ProcessResult;
@@ -61,6 +62,5 @@ public class ExampleSiteService extends AbstractVOService<ExampleSiteVO, Example
 
         return result;
     }
-
 
 }

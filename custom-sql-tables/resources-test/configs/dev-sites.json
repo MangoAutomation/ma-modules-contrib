@@ -1,0 +1,13 @@
+{
+    "example-sites":[
+        {
+            "xid":"ES_ee8a7296-42dc-4c81-9140-2da097c14007",
+            "data":null,
+            "readPermission":[
+            ],
+            "name":"Example site",
+            "editPermission":[
+            ]
+        }
+    ]
+}

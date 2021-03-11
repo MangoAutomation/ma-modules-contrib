@@ -27,11 +27,11 @@ public class ExampleSchemaDefinition extends DatabaseSchemaDefinition {
 
     @Override
     public String getUpgradePackage() {
-        return "com.infiniteautomation.mango.example.db.upgrade";
+        return "com.infiniteautomation.mango.example.sqlTables.db.upgrade";
     }
 
     @Override
     public int getDatabaseSchemaVersion() {
-        return 1;
+        return 3;
     }
 }

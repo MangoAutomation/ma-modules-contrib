@@ -28,7 +28,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleAssetVO;
 import com.infiniteautomation.mango.rest.latest.model.ExampleAssetModel;
 import com.infiniteautomation.mango.rest.latest.model.ExampleAssetModelMapping;
-import com.infiniteautomation.mango.rest.latest.model.ExampleSiteModel;
 import com.infiniteautomation.mango.rest.latest.model.RestModelMapper;
 import com.infiniteautomation.mango.rest.latest.model.StreamedArrayWithTotal;
 import com.infiniteautomation.mango.rest.latest.model.StreamedVORqlQueryWithTotal;
@@ -73,7 +72,7 @@ public class ExampleAssetRestController {
     @ApiOperation(
             value = "Query",
             notes = "Use RQL formatted query",
-            response=ExampleSiteModel.class,
+            response=ExampleAssetModel.class,
             responseContainer="List"
     )
     @RequestMapping(method = RequestMethod.GET)

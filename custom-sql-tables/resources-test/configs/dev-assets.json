@@ -1,0 +1,14 @@
+{
+    "example-assets":[
+        {
+            "xid":"ES_807ac49c-1b64-4417-b98d-1a807c7e226e",
+            "data":null,
+            "siteXid":"ES_4514f30c-7e30-48a9-a295-88df6ce545b1",
+            "readPermission":[
+            ],
+            "name":"Example asset",
+            "editPermission":[
+            ]
+        }
+    ]
+}

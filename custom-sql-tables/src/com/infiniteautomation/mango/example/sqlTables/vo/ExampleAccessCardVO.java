@@ -11,36 +11,35 @@ import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.infiniteautomation.mango.example.sqlTables.ExampleAssetAuditEventTypeDefinition;
+import com.infiniteautomation.mango.example.sqlTables.ExampleAccessCardAuditEventTypeDefinition;
 import com.infiniteautomation.mango.permission.MangoPermission;
-import com.infiniteautomation.mango.spring.dao.ExampleSiteDao;
 import com.serotonin.json.JsonException;
 import com.serotonin.json.JsonReader;
 import com.serotonin.json.ObjectWriter;
 import com.serotonin.json.spi.JsonProperty;
 import com.serotonin.json.type.JsonObject;
 import com.serotonin.m2m2.Common;
+import com.serotonin.m2m2.db.dao.UserDao;
 import com.serotonin.m2m2.i18n.TranslatableJsonException;
 import com.serotonin.m2m2.vo.AbstractVO;
 
-public class ExampleAssetVO extends AbstractVO {
+public class ExampleAccessCardVO extends AbstractVO {
 
-    public static final String XID_PREFIX = "EA_";
+    public static final String XID_PREFIX = "EAC_";
 
     @JsonProperty
     private MangoPermission editPermission = new MangoPermission();
     @JsonProperty
     private MangoPermission readPermission = new MangoPermission();
-    private int siteId;
+    private int userId;
     @JsonProperty
     private JsonNode data;
 
     //
     //
-    // Convenience data from site
+    // Convenience data from user
     //
-    private String siteName;
-    private String siteXid;
+    private String username;
 
     public MangoPermission getEditPermission() {
         return editPermission;
@@ -58,14 +57,6 @@ public class ExampleAssetVO extends AbstractVO {
         this.readPermission = readPermission;
     }
 
-    public int getSiteId() {
-        return siteId;
-    }
-
-    public void setSiteId(int siteId) {
-        this.siteId = siteId;
-    }
-
     public JsonNode getData() {
         return data;
     }
@@ -74,37 +65,37 @@ public class ExampleAssetVO extends AbstractVO {
         this.data = data;
     }
 
-    public String getSiteName() {
-        return siteName;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setSiteName(String siteName) {
-        this.siteName = siteName;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getSiteXid() {
-        return siteXid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSiteXid(String siteXid) {
-        this.siteXid = siteXid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String getTypeKey() {
-        return ExampleAssetAuditEventTypeDefinition.TYPE_KEY;
+        return ExampleAccessCardAuditEventTypeDefinition.TYPE_KEY;
     }
 
     @Override
     public void jsonRead(JsonReader reader, JsonObject jsonObject) throws JsonException {
         super.jsonRead(reader, jsonObject);
-        String siteXid = jsonObject.getString("siteXid");
-        if(StringUtils.isNotEmpty(siteXid)) {
-            Integer siteId = Common.getBean(ExampleSiteDao.class).getIdByXid(siteXid);
-            if(siteId == null) {
-                throw new TranslatableJsonException("example.emport.site.invalidReference", siteXid);
+        String username = jsonObject.getString("username");
+        if(StringUtils.isNotEmpty(username)) {
+            Integer userId = Common.getBean(UserDao.class).getIdByXid(username);
+            if(userId == null) {
+                throw new TranslatableJsonException("example.emport.user.invalidReference", username, xid);
             }else {
-                this.siteId = siteId;
+                this.userId = userId;
             }
         }
     }
@@ -112,6 +103,6 @@ public class ExampleAssetVO extends AbstractVO {
     @Override
     public void jsonWrite(ObjectWriter writer) throws IOException, JsonException {
         super.jsonWrite(writer);
-        writer.writeEntry("siteXid", Common.getBean(ExampleSiteDao.class).getXidById(siteId));
+        writer.writeEntry("username", Common.getBean(UserDao.class).getXidById(userId));
     }
 }

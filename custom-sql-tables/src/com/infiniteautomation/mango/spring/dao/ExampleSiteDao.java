@@ -26,12 +26,16 @@ import com.serotonin.m2m2.db.dao.AbstractVoDao;
 @Repository
 public class ExampleSiteDao extends AbstractVoDao<ExampleSiteVO, ExampleSitesRecord, ExampleSites> {
 
+    private final ExampleAccessCardDao accessCardDao;
+
     @Autowired
     private ExampleSiteDao(
             @Qualifier(MangoRuntimeContextConfiguration.DAO_OBJECT_MAPPER_NAME) ObjectMapper mapper,
             ApplicationEventPublisher publisher,
-            PermissionService permissionService) {
+            PermissionService permissionService,
+            ExampleAccessCardDao accessCardDao) {
         super(ExampleSiteAuditEventTypeDefinition.TYPE_NAME, ExampleSites.EXAMPLE_SITES, mapper, publisher, permissionService);
+        this.accessCardDao = accessCardDao;
     }
 
     @Override
@@ -74,10 +78,10 @@ public class ExampleSiteDao extends AbstractVoDao<ExampleSiteVO, ExampleSitesRec
     @Override
     public void saveRelationalData(ExampleSiteVO existing, ExampleSiteVO vo) {
         if(existing != null) {
-            if(!existing.getReadPermission().equals(vo.getReadPermission())) {
+            if (!existing.getReadPermission().equals(vo.getReadPermission())) {
                 permissionService.deletePermissions(existing.getReadPermission());
             }
-            if(!existing.getEditPermission().equals(vo.getEditPermission())) {
+            if (!existing.getEditPermission().equals(vo.getEditPermission())) {
                 permissionService.deletePermissions(existing.getEditPermission());
             }
         }

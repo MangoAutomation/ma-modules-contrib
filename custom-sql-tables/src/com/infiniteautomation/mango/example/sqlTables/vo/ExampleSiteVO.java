@@ -6,10 +6,16 @@
 
 package com.infiniteautomation.mango.example.sqlTables.vo;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.infiniteautomation.mango.example.sqlTables.ExampleSiteAuditEventTypeDefinition;
 import com.infiniteautomation.mango.permission.MangoPermission;
+import com.infiniteautomation.mango.spring.dao.ExampleAccessCardDao;
+import com.serotonin.json.JsonException;
+import com.serotonin.json.ObjectWriter;
 import com.serotonin.json.spi.JsonProperty;
+import com.serotonin.m2m2.Common;
 import com.serotonin.m2m2.vo.AbstractVO;
 
 public class ExampleSiteVO extends AbstractVO {
@@ -47,8 +53,17 @@ public class ExampleSiteVO extends AbstractVO {
         this.data = data;
     }
 
+
     @Override
     public String getTypeKey() {
         return ExampleSiteAuditEventTypeDefinition.TYPE_KEY;
     }
+
+    @Override
+    public void jsonWrite(ObjectWriter writer) throws IOException, JsonException {
+        super.jsonWrite(writer);
+        //Write out any access cards we have
+        writer.writeEntry("accessCardXids", Common.getBean(ExampleAccessCardDao.class).getCardXidsForSite(id));
+    }
+
 }
