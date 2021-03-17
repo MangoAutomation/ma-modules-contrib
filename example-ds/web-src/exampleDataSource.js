@@ -35,7 +35,8 @@ const examplePollingDataSourceModule = angular.module('maExamplePollingDataSourc
                 }
             },
             eventAlarmLevels: [
-                {eventType: 'POLL_ABORTED', level: 'URGENT', duplicateHandling: 'IGNORE', descriptionKey: 'event.ds.pollAborted'}
+                {eventType: 'POLL_ABORTED', level: 'URGENT', duplicateHandling: 'IGNORE', descriptionKey: 'event.ds.pollAborted'},
+                {eventType: 'DATA_SOURCE_EXCEPTION', level: 'URGENT', duplicateHandling: 'IGNORE', descriptionKey: 'event.ds.dataSource'}
             ],
             quantize: false,
             useCron: false,

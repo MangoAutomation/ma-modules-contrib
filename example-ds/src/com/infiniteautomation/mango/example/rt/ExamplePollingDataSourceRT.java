@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.infiniteautomation.mango.example.vo.ExamplePollingDataSourceVO;
+import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataImage.DataPointRT;
 import com.serotonin.m2m2.rt.dataImage.PointValueTime;
 import com.serotonin.m2m2.rt.dataImage.SetPointSource;
@@ -22,6 +23,7 @@ public class ExamplePollingDataSourceRT extends PollingDataSource<ExamplePolling
 
     //Events that can be generated
     public static final int POLL_ABORTED_EVENT = 1;
+    public static final int DATA_SOURCE_EXCEPTION_EVENT = 2;
     
     public ExamplePollingDataSourceRT(ExamplePollingDataSourceVO vo) {
         super(vo);
@@ -33,8 +35,8 @@ public class ExamplePollingDataSourceRT extends PollingDataSource<ExamplePolling
      */
     @Override
     protected void doPoll(long scheduledPollTime) {
-        // TODO Auto-generated method stub
-        
+        raiseEvent(DATA_SOURCE_EXCEPTION_EVENT, System.currentTimeMillis(), true, new TranslatableMessage(
+                "literal", "Event Raised"));
     }
 
     /*

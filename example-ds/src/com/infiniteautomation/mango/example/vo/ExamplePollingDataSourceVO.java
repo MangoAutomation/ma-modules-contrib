@@ -29,6 +29,7 @@ public class ExamplePollingDataSourceVO extends PollingDataSourceVO {
     private static final ExportCodes EVENT_CODES = new ExportCodes();
     static {
         EVENT_CODES.addElement(ExamplePollingDataSourceRT.POLL_ABORTED_EVENT, POLL_ABORTED);
+        EVENT_CODES.addElement(ExamplePollingDataSourceRT.DATA_SOURCE_EXCEPTION_EVENT, "DATA_SOURCE_EXCEPTION");
     }
 
     /*
@@ -37,6 +38,8 @@ public class ExamplePollingDataSourceVO extends PollingDataSourceVO {
     @Override
     protected void addEventTypes(List<EventTypeVO> ets) {
         super.addEventTypes(ets);
+        ets.add(createEventType(ExamplePollingDataSourceRT.DATA_SOURCE_EXCEPTION_EVENT, new TranslatableMessage(
+                "event.ds.dataSource")));
     }
 
     /*
