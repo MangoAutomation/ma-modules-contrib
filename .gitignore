@@ -13,6 +13,6 @@ maven-target/
 .classpath
 .settings
 .project
-web/angular
+web/angular/
 node_modules/
 node/
