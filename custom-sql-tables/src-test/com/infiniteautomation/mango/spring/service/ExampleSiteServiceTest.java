@@ -6,8 +6,6 @@
 
 package com.infiniteautomation.mango.spring.service;
 
-import java.util.Collections;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
@@ -20,7 +18,6 @@ import com.infiniteautomation.mango.permission.MangoPermission;
 import com.infiniteautomation.mango.spring.dao.ExampleSiteDao;
 import com.serotonin.m2m2.Common;
 import com.serotonin.m2m2.vo.User;
-import com.serotonin.m2m2.vo.role.Role;
 
 public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest<ExampleSiteVO,
         ExampleSitesRecord, ExampleSites, ExampleSiteDao, ExampleSiteService> {
@@ -78,12 +75,7 @@ public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest
     }
 
     @Override
-    void addReadRoleToFail(Role role, ExampleSiteVO vo) {
-        vo.getReadPermission().getRoles().add(Collections.singleton(role));
-    }
-
-    @Override
-    String getReadRolesContextKey() {
+    String getReadPermissionContextKey() {
         return "readPermission";
     }
 
@@ -93,12 +85,8 @@ public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest
     }
 
     @Override
-    void addEditRoleToFail(Role role, ExampleSiteVO vo) {
-        vo.getEditPermission().getRoles().add(Collections.singleton(role));
-    }
-
-    @Override
-    String getEditRolesContextKey() {
+    String getEditPermissionContextKey() {
         return "editPermission";
     }
+
 }
