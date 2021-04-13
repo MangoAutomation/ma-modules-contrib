@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.infiniteautomation.mango.example.sqlTables.ExampleSiteCreatePermission;
-import com.infiniteautomation.mango.example.sqlTables.vo.ExampleAccessCardVO;
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleSiteVO;
 import com.infiniteautomation.mango.spring.dao.ExampleSiteDao;
 import com.serotonin.m2m2.i18n.ProcessResult;
@@ -46,8 +45,8 @@ public class ExampleSiteService extends AbstractVOService<ExampleSiteVO, Example
     @Override
     public ProcessResult validate(ExampleSiteVO vo, PermissionHolder user) {
         ProcessResult result = super.validate(vo, user);
-        permissionService.validatePermission(result, "readPermission", user, null, vo.getReadPermission());
-        permissionService.validatePermission(result, "editPermission", user, null, vo.getEditPermission());
+        permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());
+        permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission());
 
         return result;
     }
@@ -57,8 +56,8 @@ public class ExampleSiteService extends AbstractVOService<ExampleSiteVO, Example
         ProcessResult result = super.validate(existing, vo, user);
 
         //Additional checks for existing list
-        permissionService.validatePermission(result, "readPermission", user, existing.getReadPermission(), vo.getReadPermission());
-        permissionService.validatePermission(result, "editPermission", user, existing.getEditPermission(), vo.getEditPermission());
+        permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());
+        permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission());
 
         return result;
     }

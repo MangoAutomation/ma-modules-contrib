@@ -44,8 +44,8 @@ public class ExampleAccessCardService extends AbstractVOService<ExampleAccessCar
     @Override
     public ProcessResult validate(ExampleAccessCardVO vo, PermissionHolder user) {
         ProcessResult result = super.validate(vo, user);
-        permissionService.validatePermission(result, "readPermission", user, null, vo.getReadPermission());
-        permissionService.validatePermission(result, "editPermission", user, null, vo.getEditPermission());
+        permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission(), true);
+        permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission(), true);
 
         return result;
     }
@@ -55,8 +55,8 @@ public class ExampleAccessCardService extends AbstractVOService<ExampleAccessCar
         ProcessResult result = super.validate(existing, vo, user);
 
         //Additional checks for existing list
-        permissionService.validatePermission(result, "readPermission", user, existing.getReadPermission(), vo.getReadPermission());
-        permissionService.validatePermission(result, "editPermission", user, existing.getEditPermission(), vo.getEditPermission());
+        permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission(), true);
+        permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission(), true);
 
         return result;
     }

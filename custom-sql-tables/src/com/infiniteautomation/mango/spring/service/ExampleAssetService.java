@@ -37,8 +37,8 @@ public class ExampleAssetService extends AbstractVOService<ExampleAssetVO, Examp
     @Override
     public ProcessResult validate(ExampleAssetVO vo, PermissionHolder user) {
         ProcessResult result = super.validate(vo, user);
-        permissionService.validatePermission(result, "readPermission", user, null, vo.getReadPermission());
-        permissionService.validatePermission(result, "editPermission", user, null, vo.getEditPermission());
+        permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());
+        permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission());
 
         return result;
     }
@@ -48,8 +48,8 @@ public class ExampleAssetService extends AbstractVOService<ExampleAssetVO, Examp
         ProcessResult result = super.validate(existing, vo, user);
 
         //Additional checks for existing list
-        permissionService.validatePermission(result, "readPermission", user, existing.getReadPermission(), vo.getReadPermission());
-        permissionService.validatePermission(result, "editPermission", user, existing.getEditPermission(), vo.getEditPermission());
+        permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());
+        permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission());
 
         return result;
     }
