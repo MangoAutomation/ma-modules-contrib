@@ -7,6 +7,7 @@
 package com.infiniteautomation.mango.rest.latest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +41,7 @@ public class ExampleSiteWebsocketHandler extends DaoNotificationWebSocketHandler
     }
 
     @Override
-    protected Object createModel(ExampleSiteVO vo, PermissionHolder user) {
+    protected Object createModel(ExampleSiteVO vo, ApplicationEvent event, PermissionHolder user) {
         return mapping.map(vo, user, mapper);
     }
 
