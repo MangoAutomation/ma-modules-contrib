@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@infinite-automation/customSqlTables",
-  "version": "4.0.0-SNAPSHOT",
+  "version": "4.1.1-SNAPSHOT",
   "description": "Example of adding sql tables to Mango",
   "main": "web/angular/customSqlTables.js",
   "dependencies": {},
