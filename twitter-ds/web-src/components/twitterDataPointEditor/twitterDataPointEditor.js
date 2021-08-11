@@ -21,6 +21,10 @@ class TwitterDataPointEditorController {
 
     }
 
+    getTweets() {
+
+    }
+
 }
 
 export default {

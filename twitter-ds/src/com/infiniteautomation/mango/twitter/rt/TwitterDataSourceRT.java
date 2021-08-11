@@ -5,14 +5,16 @@ package com.infiniteautomation.mango.twitter.rt;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infiniteautomation.mango.spring.MangoRuntimeContextConfiguration;
+import com.infiniteautomation.mango.twitter.TwitterClientTools;
 import com.infiniteautomation.mango.twitter.vo.TwitterDataSourceVO;
+import com.serotonin.m2m2.Common;
 import com.serotonin.m2m2.DataTypes;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataImage.DataPointRT;
@@ -26,7 +28,7 @@ import com.serotonin.m2m2.rt.dataSource.PollingDataSource;
  */
 public class TwitterDataSourceRT extends PollingDataSource<TwitterDataSourceVO> {
 
-    protected final Log LOG = LogFactory.getLog(TwitterDataSourceRT.class);
+    private final Logger log = LoggerFactory.getLogger(TwitterDataSourceRT.class);
 
     //Events that can be generated
     public static final int POLL_ABORTED_EVENT = 1;
@@ -35,18 +37,20 @@ public class TwitterDataSourceRT extends PollingDataSource<TwitterDataSourceVO> 
 
     private boolean errorState = true;
 
+    private ObjectMapper mapper;
+
 
     public TwitterDataSourceRT(TwitterDataSourceVO vo) {
         super(vo);
     }
 
-    @Override
-    public void initialize() {
+    @Override public void initialize() {
         super.initialize();
+        mapper = Common.getBean(ObjectMapper.class,
+                MangoRuntimeContextConfiguration.COMMON_OBJECT_MAPPER_NAME);
     }
 
-    @Override
-    public void addDataPointImpl(DataPointRT dataPoint) {
+    @Override public void addDataPointImpl(DataPointRT dataPoint) {
         TwitterPointLocatorRT plrt = dataPoint.getPointLocator();
         plrt.initialize(this);
         addDataPointImpl(dataPoint, true);
@@ -60,11 +64,11 @@ public class TwitterDataSourceRT extends PollingDataSource<TwitterDataSourceVO> 
         // TODO Auto-generated method stub
         if (dataPoints.size() > 0) {
 
-            for (DataPointRT dprt : dataPoints) {
-                TwitterPointLocatorRT plrt = dprt.getPointLocator();
+            for (DataPointRT dataPointRT : dataPoints) {
+                TwitterPointLocatorRT twitterPointLocatorRT = dataPointRT.getPointLocator();
 
 
-                switch (plrt.getVo().getDataTypeId()) {
+                switch (twitterPointLocatorRT.getVo().getDataTypeId()) {
                     case DataTypes.NUMERIC:
                     case DataTypes.BINARY:
                     case DataTypes.MULTISTATE:
@@ -72,43 +76,38 @@ public class TwitterDataSourceRT extends PollingDataSource<TwitterDataSourceVO> 
                     default:
                         break;
                     case DataTypes.ALPHANUMERIC:
-                        if (!plrt.getClient().isDone() ) {
-                            String msg = null;
+                        if (!twitterPointLocatorRT.getClient().isDone()) {
+                            String msg;
                             try {
-                                msg = plrt.getMsgQueue().poll(pollingPeriodMillis - 10,
-                                        TimeUnit.MILLISECONDS);
-                                if(msg!=null) {
-                                    ObjectMapper mapper = new ObjectMapper();
-                                    JsonNode actualObj = mapper.readTree(msg);
-                                    msg = actualObj.get("text").asText();
-                                    dprt.updatePointValue(new PointValueTime(new AlphanumericValue(msg),
-                                            scheduledPollTime));
+                                msg = twitterPointLocatorRT.getMsgQueue()
+                                        .poll(pollingPeriodMillis - 10, TimeUnit.MILLISECONDS);
+                                if (msg != null) {
+                                    //JsonNode actualObj = mapper.readTree(msg);
+                                    msg = TwitterClientTools.getTweet(msg, mapper);
+                                    //msg = actualObj.get("text").asText();
+                                    dataPointRT.updatePointValue(
+                                            new PointValueTime(new AlphanumericValue(msg),
+                                                    scheduledPollTime));
                                     errorState = false;
-                                }else {
+                                } /*else {
                                     //is this really a failure?
                                     raiseEvent(TWITTER_API_FAILURE_EVENT, scheduledPollTime, true,
                                             new TranslatableMessage("twitter.events.apiFailure",
                                                     "Null message"));
                                     errorState = true;
-                                }
+                                }*/
 
-                            } catch (InterruptedException e) {
-                                LOG.error("While polling", e);
-                                raiseEvent(TWITTER_API_FAILURE_EVENT, scheduledPollTime, true,
-                                        new TranslatableMessage("twitter.events.apiFailure",
-                                                e.getMessage()));
-                                errorState = true;
                             } catch (JsonMappingException e1) {
-                                LOG.error("While polling", e1);
+                                log.error("While polling", e1);
                                 raiseEvent(TWITTER_API_FAILURE_EVENT, scheduledPollTime, true,
                                         new TranslatableMessage("twitter.events.apiFailure",
                                                 e1.getMessage()));
                                 errorState = true;
-                            } catch (JsonProcessingException e2) {
-                                LOG.error("While polling", e2);
+                            } catch (InterruptedException | JsonProcessingException e) {
+                                log.error("While polling", e);
                                 raiseEvent(TWITTER_API_FAILURE_EVENT, scheduledPollTime, true,
                                         new TranslatableMessage("twitter.events.apiFailure",
-                                                e2.getMessage()));
+                                                e.getMessage()));
                                 errorState = true;
                             }
                         }

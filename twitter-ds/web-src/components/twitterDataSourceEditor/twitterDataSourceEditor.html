@@ -49,3 +49,36 @@
     </md-input-container>
 
 </div>
+
+<md-tab md-on-select="$ctrl.dataSourceEditor.hideSaveButtons = true;" md-on-deselect="$ctrl.dataSourceEditor.hideSaveButtons = false;">
+    <md-tab-label>
+        <span ma-tr="twitter.tools"></span>
+    </md-tab-label>
+    <md-tab-body>
+        <div class="md-padding">
+            <h3 ma-tr="twitter.tweet.test"></h3>
+
+            <div flex="100" id="toolsTweetFilter" class="values-container">
+                <label ma-tr="twitter.datapoint.tweetFilter"></label>
+                <md-chips ng-model="$ctrl.toolsTweetFilter" readonly="false" md-removable="true"
+                          md-separator-keys="$ctrl.separatorKeys" ma-form-exclude ma-get-ctrl="toolsTweetFilterModelCtrl = $ngModel">
+
+                    <md-chip-template>
+            <span>
+                <strong>{{$chip}}</strong>
+            </span>
+                    </md-chip-template>
+                </md-chips>
+
+                <div ng-messages="values.$error">
+                    <div ng-message="required" ma-tr="validate.required"></div>
+                    <div ng-message="validationMessage" ng-bind="toolsTweetFilterModelCtrl.validationMessage"></div>
+                </div>
+            </div>
+
+            <md-button class="md-raised" ng-click="$ctrl.getTweets()">
+                <span ma-tr="twitter.tools.getTweets"></span>
+            </md-button>
+        </div>
+    </md-tab-body>
+</md-tab>

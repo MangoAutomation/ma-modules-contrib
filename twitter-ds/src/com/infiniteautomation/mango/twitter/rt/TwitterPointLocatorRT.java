@@ -8,6 +8,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.google.common.collect.Lists;
+import com.infiniteautomation.mango.twitter.TwitterClientTools;
 import com.infiniteautomation.mango.twitter.vo.TwitterPointLocatorVO;
 import com.serotonin.m2m2.rt.dataSource.PointLocatorRT;
 import com.twitter.hbc.ClientBuilder;
@@ -41,7 +42,8 @@ public class TwitterPointLocatorRT extends PointLocatorRT<TwitterPointLocatorVO>
     }
     public void initialize(TwitterDataSourceRT dataSource){
         this.dataSource = dataSource;
-        client = getTwitterClient();
+        client = TwitterClientTools.getTwitterClient(dataSource.getVo().getConsumerKey(), dataSource.getVo().getConsumerSecret(),
+                dataSource.getVo().getToken(), dataSource.getVo().getSecret(),vo.getTweetFilter(), msgQueue);
         client.connect();
     }
     public Client getClient() {
@@ -50,10 +52,12 @@ public class TwitterPointLocatorRT extends PointLocatorRT<TwitterPointLocatorVO>
     public BlockingQueue<String> getMsgQueue() {
         return msgQueue;
     }
+
     /*
      * Provides a twitter client.
      * Declares the host to connect to, the endpoint, and authentication (basic auth or oauth)
      */
+    @Deprecated
     private Client getTwitterClient() {
         // Host to connect to
         Hosts streamHost = new HttpHosts(Constants.STREAM_HOST);
