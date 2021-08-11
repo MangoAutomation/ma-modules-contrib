@@ -5,11 +5,11 @@
 	<parent>
 		<artifactId>ma-modules-contrib</artifactId>
 		<groupId>com.infiniteautomation.mango</groupId>
-		<version>4.1.2-SNAPSHOT</version>
+		<version>4.2.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>system-settings-ds</artifactId>
-	<version>4.1.1-SNAPSHOT</version>
+	<version>4.2.0-SNAPSHOT</version>
 	<name>systemSettingsDataSource</name>
 	<description>Example data source for learning the Mango programming api to make http requests for Mango system settings
 		and process them</description>
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>com.infiniteautomation.mango</groupId>
 			<artifactId>mango-api</artifactId>
-			<version>4.1.1-SNAPSHOT</version>
+			<version>4.2.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
