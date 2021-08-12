@@ -21,7 +21,8 @@
     <md-input-container fflex="100" flex-gt-md="50">
         <md-icon>key</md-icon>
         <label ma-tr="twitter.datasource.consumerSecret"></label>
-        <input name="consumerSecret" ng-model="$ctrl.dataSource.consumerSecret" ma-get-ctrl="consumerSecretModelCtrl = $ngModel">
+        <input name="consumerSecret" ng-model="$ctrl.dataSource.consumerSecret"
+            ma-get-ctrl="consumerSecretModelCtrl = $ngModel">
         <div ng-messages="uriModelCtrl.$error">
             <div ng-message="required" ma-tr="validate.required"></div>
             <div ng-message="validationMessage" ng-bind="consumerSecretModelCtrl.validationMessage"></div>
@@ -50,7 +51,8 @@
 
 </div>
 
-<md-tab md-on-select="$ctrl.dataSourceEditor.hideSaveButtons = true;" md-on-deselect="$ctrl.dataSourceEditor.hideSaveButtons = false;">
+<md-tab md-on-select="$ctrl.dataSourceEditor.hideSaveButtons = true;"
+    md-on-deselect="$ctrl.dataSourceEditor.hideSaveButtons = false;">
     <md-tab-label>
         <span ma-tr="twitter.tools"></span>
     </md-tab-label>
@@ -61,12 +63,13 @@
             <div flex="100" id="toolsTweetFilter" class="values-container">
                 <label ma-tr="twitter.datapoint.tweetFilter"></label>
                 <md-chips ng-model="$ctrl.toolsTweetFilter" readonly="false" md-removable="true"
-                          md-separator-keys="$ctrl.separatorKeys" ma-form-exclude ma-get-ctrl="toolsTweetFilterModelCtrl = $ngModel">
+                    md-separator-keys="$ctrl.separatorKeys" ma-form-exclude
+                    ma-get-ctrl="toolsTweetFilterModelCtrl = $ngModel">
 
                     <md-chip-template>
-            <span>
-                <strong>{{$chip}}</strong>
-            </span>
+                        <span>
+                            <strong>{{$chip}}</strong>
+                        </span>
                     </md-chip-template>
                 </md-chips>
 
@@ -76,9 +79,48 @@
                 </div>
             </div>
 
+            <md-input-container fflex="100" flex-gt-md="50">
+                <label ma-tr="twitter.datasource.numTweets"></label>
+                <input name="numTweets" type="number" ng-model="$ctrl.numTweets"
+                    ma-get-ctrl="numTweetsModelCtrl = $ngModel">
+                <div ng-messages="uriModelCtrl.$error">
+                    <div ng-message="required" ma-tr="validate.required"></div>
+                    <div ng-message="validationMessage" ng-bind="numTweetsModelCtrl.validationMessage"></div>
+                </div>
+            </md-input-container>
+
             <md-button class="md-raised" ng-click="$ctrl.getTweets()">
                 <span ma-tr="twitter.tools.getTweets"></span>
             </md-button>
+        </div>
+        <div class="md-padding">
+            <md-table-container>
+                <table md-table>
+                    <thead md-head md-progress="$ctrl.query.promise">
+                        <tr md-row>
+                            <th md-column ma-tr="twitter.tools.tweets"></th>
+                        </tr>
+                    </thead>
+                    <tbody md-body ng-if="$ctrl.query.total === 0">
+                        <tr md-row>
+                            <td md-cell ma-tr="twitter.tools.noItemsAssigned"></td>
+                        </tr>
+                    </tbody>
+                    <tbody md-body ng-if="$ctrl.query.total > 0">
+                        <tr md-row
+                            ng-repeat="item in $ctrl.items | limitTo: $ctrl.query.limit: ($ctrl.query.page - 1) * $ctrl.query.limit"
+                            ng-init="itemIndex = $index">
+                            <td md-cell>
+                                {{ item }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+
+            <md-table-pagination md-limit="$ctrl.query.limit" md-limit-options="[5, 10, 20, 50, 100]"
+                md-page="$ctrl.query.page" md-total="{{$ctrl.query.total}}">
+            </md-table-pagination>
         </div>
     </md-tab-body>
 </md-tab>

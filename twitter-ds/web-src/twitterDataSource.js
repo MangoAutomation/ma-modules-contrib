@@ -1,14 +1,17 @@
-
 import angular from 'angular';
 import twitterDataSourceEditor from './components/twitterDataSourceEditor/twitterDataSourceEditor';
 import twitterDataPointEditor from './components/twitterDataPointEditor/twitterDataPointEditor';
 import dsHelpTemplate from './help/dsHelp.html';
 import dpHelpTemplate from './help/dpHelp.html';
 
+// Services
+import twitterFactory from './services/twitter';
+
 const twitterModule = angular
     .module('maExamplePollingDataSourceModule', ['maUiApp'])
     .component('maTwitterDataSourceEditor', twitterDataSourceEditor)
     .component('maTwitterDataPointEditor', twitterDataPointEditor)
+    .factory('maTwitterFactory', twitterFactory)
     .config([
         'maDataSourceProvider',
         'maPointProvider',
@@ -37,7 +40,12 @@ const twitterModule = angular
                     },
                     eventAlarmLevels: [
                         { eventType: 'POLL_ABORTED', level: 'URGENT', duplicateHandling: 'IGNORE', descriptionKey: 'event.ds.pollAborted' },
-                        { eventType: 'TWITTER_API_FAILURE', level: 'URGENT', duplicateHandling: 'IGNORE', descriptionKey: 'twitter.events.apiFailureDescription'}
+                        {
+                            eventType: 'TWITTER_API_FAILURE',
+                            level: 'URGENT',
+                            duplicateHandling: 'IGNORE',
+                            descriptionKey: 'twitter.events.apiFailureDescription'
+                        }
                     ],
                     quantize: false,
                     useCron: false,
@@ -45,8 +53,7 @@ const twitterModule = angular
                     consumerKey: '',
                     consumerSecret: '',
                     token: '',
-                    secret: '',
-
+                    secret: ''
                 },
                 defaultDataPoint: {
                     dataSourceTypeName: 'TWITTER_DS',
@@ -55,7 +62,6 @@ const twitterModule = angular
                         modelType: 'PL.TWITTER',
                         tweetFilter: [],
                         settable: false
-
                     }
                 },
                 bulkEditorColumns: []
