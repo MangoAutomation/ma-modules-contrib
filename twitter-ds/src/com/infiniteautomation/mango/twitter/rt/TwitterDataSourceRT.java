@@ -89,13 +89,7 @@ public class TwitterDataSourceRT extends PollingDataSource<TwitterDataSourceVO> 
                                             new PointValueTime(new AlphanumericValue(msg),
                                                     scheduledPollTime));
                                     errorState = false;
-                                } /*else {
-                                    //is this really a failure?
-                                    raiseEvent(TWITTER_API_FAILURE_EVENT, scheduledPollTime, true,
-                                            new TranslatableMessage("twitter.events.apiFailure",
-                                                    "Null message"));
-                                    errorState = true;
-                                }*/
+                                }
 
                             } catch (JsonMappingException e1) {
                                 log.error("While polling", e1);
