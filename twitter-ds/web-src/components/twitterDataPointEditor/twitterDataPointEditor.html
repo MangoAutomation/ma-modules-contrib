@@ -1,0 +1,33 @@
+<h3>
+    <span ma-tr="twitter.datapoint.description"></span>
+    <md-button class="md-icon-button ma-small-button ma-no-margin" ui-sref="ui.help.TwitterDataPoint">
+        <md-icon>help</md-icon>
+    </md-button>
+</h3>
+
+<div layout="row" layout-wrap layout-align="space-between start" class="ma-inputs-container">
+    <div flex="100" flex-gt-md="50">
+        <md-checkbox ma-flatten-values="false" class="ma-margin-input-container" name="settable" ng-model="$ctrl.dataPoint.pointLocator.settable">
+            <span ma-tr="dsEdit.settable"></span>
+        </md-checkbox>
+    </div>
+
+    <div flex="100" id="tweetFilter" class="values-container">
+        <label ma-tr="twitter.datapoint.tweetFilter"></label>
+        <md-chips ng-model="$ctrl.dataPoint.pointLocator.tweetFilter" readonly="false" md-removable="true"
+                  md-separator-keys="$ctrl.separatorKeys" ma-form-exclude ma-get-ctrl="tweetFilterModelCtrl = $ngModel">
+
+            <md-chip-template>
+            <span>
+                <strong>{{$chip}}</strong>
+            </span>
+            </md-chip-template>
+        </md-chips>
+
+        <div ng-messages="values.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="tweetFilterModelCtrl.validationMessage"></div>
+        </div>
+    </div>
+
+</div>

@@ -1,23 +1,25 @@
 {
   "private": true,
-  "name": "@infinite-automation/customSqlTables",
+  "name": "@infinite-automation/twitterDataSource",
   "version": "4.2.0-SNAPSHOT",
-  "description": "Example of adding sql tables to Mango",
-  "main": "web/angular/customSqlTables.js",
-  "dependencies": {},
+  "description": "This data source gets real world information from Twitter based on some keywords",
+  "main": "web/twitterDataSource.js",
+  "dependencies": {
+    "chai": "^4.3.4"
+  },
   "devDependencies": {
     "@infinite-automation/mango-module-tools": "^2.1.0"
   },
   "scripts": {
     "webpack": "webpack --config webpack.config.js"
   },
-  "author": "Terry Packer <terry@infiniteautomation.com>",
+  "author": "Benjamin Perez",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
     "url": "https://github.com/infiniteautomation/mango-modules-contrib.git"
   },
   "com_infiniteautomation": {
-    "moduleName": "customSqlTables"
+    "moduleName": "twitterDataSource"
   }
 }
