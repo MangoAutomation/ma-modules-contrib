@@ -27,9 +27,11 @@ describe('Twitter data source', function() {
     it('Create data source', () => {
         const ds = newDataSource();
         const local = Object.assign({}, ds);
+        debugger;
         return ds.save().then(saved => {
+            debugger;
             testHelper.assertDataSource(saved, local, assertDataSourceAttributes);
-        }, error => {
+        }, error => {debugger;
             assertValidationErrors([''], error);
         }).finally(() => {
             return ds.delete();
@@ -44,6 +46,10 @@ describe('Twitter data source', function() {
             //Make changes
             saved.name = uuid();
             saved.polling = true;
+            saved.consumerKey = 'dummy2';
+            saved.consumerSecret = 'dummy2';
+            saved.token = 'dummy2';
+            saved.secret = 'dummy2';
             //add additional fields and modify them
             const localUpdate = Object.assign({}, saved);
             return saved.save().then(updated => {
@@ -93,9 +99,7 @@ describe('Twitter data source', function() {
             const local = Object.assign({}, dp);
             return dp.save().then(saved => {
                 testHelper.assertDataPoint(saved, local, assertPointLocator);
-                saved.pointLocator.startValue = 'true';
-                saved.pointLocator.changeType = 'ALTERNATE_BOOLEAN';
-                
+                saved.pointLocator.tweetFilter = ['#1','#2'];
                 const localUpdate = Object.assign({}, saved);
                 return saved.save().then(updated => {
                     return DataPoint.get(updated.xid).then(found => {
@@ -134,7 +138,8 @@ describe('Twitter data source', function() {
             pointLocator: {
                 dataType: 'ALPHANUMERIC',
                 settable: true,
-                modelType: 'PL.TWITTER'
+                modelType: 'PL.TWITTER',
+                tweetFilter: ['#one','#two']
             }
         });
     }
@@ -164,6 +169,10 @@ describe('Twitter data source', function() {
             quantize: false,
             useCron: false,
             polling: true,
+            consumerKey: 'dummy',
+            consumerSecret: 'dummy',
+            token: 'dummy',
+            secret: 'dummy',
             modelType: 'TWITTER_DS'
         });
     }
@@ -175,19 +184,18 @@ describe('Twitter data source', function() {
         assert.strictEqual(saved.quantize, local.quantize);
         assert.strictEqual(saved.useCron, local.useCron);
         //add assertions for the added fields
+        assert.strictEqual(saved.consumerKey, local.consumerKey);
+        assert.strictEqual(saved.consumerSecret, local.consumerSecret);
+        assert.strictEqual(saved.token, local.token);
+        assert.strictEqual(saved.secret, local.secret);
     }
     
     function assertPointLocator(saved, local) {
         assert.strictEqual(saved.dataType, local.dataType);
-        
-        assert.strictEqual(saved.changeType, local.changeType);
-        switch(saved.changeType) {
-            case 'ALTERNATE_BOOLEAN':
-                assert.strictEqual(saved.startValue, local.startValue);
-            break;
-            case 'NO_CHANGE':
-                assert.strictEqual(saved.startValue, local.startValue);
-            break;
+        assert.isArray(saved.tweetFilter);
+        assert.strictEqual(saved.tweetFilter.length, local.tweetFilter.length);
+        for(var i=0; i<saved.tweetFilter.length; i++){
+            assert.strictEqual(saved.tweetFilter[i], local.tweetFilter[i]);
         }
     }
 });

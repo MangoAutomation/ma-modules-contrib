@@ -4,7 +4,9 @@
   "version": "4.2.0-SNAPSHOT",
   "description": "This data source gets real world information from Twitter based on some keywords",
   "main": "web/twitterDataSource.js",
-  "dependencies": {},
+  "dependencies": {
+    "chai": "^4.3.4"
+  },
   "devDependencies": {
     "@infinite-automation/mango-module-tools": "^2.1.0"
   },
