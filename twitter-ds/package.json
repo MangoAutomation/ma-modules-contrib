@@ -1,14 +1,12 @@
 {
   "private": true,
   "name": "@infinite-automation/twitterDataSource",
-  "version": "4.1.1-SNAPSHOT",
+  "version": "4.2.0-SNAPSHOT",
   "description": "This data source gets real world information from Twitter based on some keywords",
   "main": "web/twitterDataSource.js",
   "dependencies": {},
   "devDependencies": {
-
     "@infinite-automation/mango-module-tools": "^2.1.0"
-
   },
   "scripts": {
     "webpack": "webpack --config webpack.config.js"
