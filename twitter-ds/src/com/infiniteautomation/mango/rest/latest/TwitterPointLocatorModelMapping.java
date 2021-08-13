@@ -14,7 +14,7 @@ import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
 /**
  * This class is used to map the VO to and from a REST Model
- * @author Benjmain Perez
+ * @author Benjamin Perez
  *
  */
 @Component

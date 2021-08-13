@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2019  Infinite Automation Software. All rights reserved.
+/*
+ * Copyright (C) 2021 RadixIot LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.twitter.rt;
 

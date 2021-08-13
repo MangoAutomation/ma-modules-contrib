@@ -25,6 +25,9 @@ import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 
+/**
+ * @author Benjamin Perez
+ */
 public class TwitterClientTools {
 
     public static Client getTwitterClient(String consumerKey, String consumerSecret, String token,

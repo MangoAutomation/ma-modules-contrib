@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2019  Infinite Automation Software. All rights reserved.
+/*
+ * Copyright (C) 2021 RadixIot LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.twitter.vo;
 
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.infiniteautomation.mango.twitter.TwitterDataSourceDefinition;
 import com.infiniteautomation.mango.twitter.rt.TwitterPointLocatorRT;
@@ -54,8 +55,8 @@ public class TwitterPointLocatorVO extends AbstractPointLocatorVO<TwitterPointLo
      */
     @Override
     public TranslatableMessage getConfigurationDescription() {
-        // TODO Auto-generated method stub
-        return null;
+        return new TranslatableMessage("twitter.datapoint.configurationDescription", this.tweetFilter == null ? "" : this.tweetFilter.stream().collect(
+                Collectors.joining(",")) );
     }
 
     /*

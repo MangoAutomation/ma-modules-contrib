@@ -9,7 +9,7 @@ import com.infiniteautomation.mango.twitter.TwitterDataSourceDefinition;
 import com.infiniteautomation.mango.twitter.vo.TwitterDataSourceVO;
 
 /**
- * @author Pier Puccini
+ * @author Benjamin Perez
  *
  */
 public class TwitterDataSourceModel extends AbstractPollingDataSourceModel<TwitterDataSourceVO>{

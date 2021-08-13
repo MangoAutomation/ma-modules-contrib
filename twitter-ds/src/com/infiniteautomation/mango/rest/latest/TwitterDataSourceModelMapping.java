@@ -13,7 +13,7 @@ import com.infiniteautomation.mango.twitter.vo.TwitterDataSourceVO;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
 /**
- * @author Pier Puccini
+ * @author Benjamin Perez
  *
  */
 @Component

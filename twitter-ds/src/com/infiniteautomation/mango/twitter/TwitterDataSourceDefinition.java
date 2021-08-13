@@ -1,8 +1,10 @@
-/**
- * Copyright (C) 2019  Infinite Automation Software. All rights reserved.
+/*
+ * Copyright (C) 2021 RadixIot LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.twitter;
 
+
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -84,11 +86,16 @@ public class TwitterDataSourceDefinition extends PollingDataSourceDefinition<Twi
             response.addContextualMessage("dataSourceId", "dpEdit.validate.invalidDataSourceType");
         }
         TwitterPointLocatorVO pl = dpvo.getPointLocator();
-        if(pl.getTweetFilter() == null) {
+        validateTweetFilter(response, pl.getTweetFilter());
+
+    }
+
+    public static void validateTweetFilter(ProcessResult response, List<String> tweetFilter) {
+        if(tweetFilter == null) {
             response.addContextualMessage("tweetFilter", "validate.required");
         }else {
             int index = 0;
-            for (String filter: pl.getTweetFilter()) {
+            for (String filter: tweetFilter) {
                 String prefix = "tweetFilter[" + index + "]";
                 if (StringUtils.isEmpty(filter)) {
                     response.addContextualMessage(prefix, "validate.required");
@@ -96,7 +103,6 @@ public class TwitterDataSourceDefinition extends PollingDataSourceDefinition<Twi
                 index++;
             }
         }
-
     }
 
 

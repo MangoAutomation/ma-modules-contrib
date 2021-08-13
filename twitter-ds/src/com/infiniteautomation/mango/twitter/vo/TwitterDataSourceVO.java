@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2019  Infinite Automation Software. All rights reserved.
+/*
+ * Copyright (C) 2021 RadixIot LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.twitter.vo;
 
@@ -86,8 +86,7 @@ public class TwitterDataSourceVO extends PollingDataSourceVO {
      */
     @Override
     public TwitterPointLocatorVO createPointLocator() {
-        TwitterPointLocatorVO tpl = new TwitterPointLocatorVO();
-        return tpl;
+        return new TwitterPointLocatorVO();
     }
 
     /*
@@ -96,7 +95,7 @@ public class TwitterDataSourceVO extends PollingDataSourceVO {
      */
     @Override
     public TranslatableMessage getConnectionDescription() {
-        return new TranslatableMessage("cc.datasource.polling.connectionDescription");
+        return new TranslatableMessage("twitter.datasource.description");
     }
 
     /*
