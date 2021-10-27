@@ -5,11 +5,11 @@
 	<parent>
 		<artifactId>ma-modules-contrib</artifactId>
 		<groupId>com.infiniteautomation.mango</groupId>
-		<version>4.2.0-SNAPSHOT</version>
+		<version>4.3.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>currency-converter</artifactId>
-	<version>4.2.0-SNAPSHOT</version>
+	<version>4.3.0-SNAPSHOT</version>
 	<name>currencyConverter</name>
 	<description>Currency converter data source, converts currencies based of their symbols</description>
 	<build>

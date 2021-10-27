@@ -5,11 +5,11 @@
 	<parent>
 		<artifactId>ma-modules-contrib</artifactId>
 		<groupId>com.infiniteautomation.mango</groupId>
-		<version>4.2.0-SNAPSHOT</version>
+		<version>4.3.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>custom-sql-tables</artifactId>
-	<version>4.2.0-SNAPSHOT</version>
+	<version>4.3.0-SNAPSHOT</version>
 	<name>customSqlTables</name>
 	<description>Example of adding sql tables to Mango</description>
 	<build>
