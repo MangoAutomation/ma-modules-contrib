@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.infiniteautomation.mango.example.sqlTables.ExampleSiteCreatePermission;
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleSiteVO;
 import com.infiniteautomation.mango.spring.dao.ExampleSiteDao;
+import com.serotonin.m2m2.Common;
 import com.serotonin.m2m2.i18n.ProcessResult;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
@@ -21,9 +22,10 @@ public class ExampleSiteService extends AbstractVOService<ExampleSiteVO, Example
     private final ExampleSiteCreatePermission createPermission;
 
     @Autowired
-    public ExampleSiteService(ExampleSiteDao exampleSiteDao, PermissionService permissionService,
-                              ExampleSiteCreatePermission createPermission) {
-        super(exampleSiteDao, permissionService);
+    public ExampleSiteService(ExampleSiteDao exampleSiteDao,
+                              ExampleSiteCreatePermission createPermission,
+                              ServiceDependencies dependencies) {
+        super(exampleSiteDao, dependencies);
         this.createPermission = createPermission;
     }
 
@@ -43,8 +45,9 @@ public class ExampleSiteService extends AbstractVOService<ExampleSiteVO, Example
     }
 
     @Override
-    public ProcessResult validate(ExampleSiteVO vo, PermissionHolder user) {
-        ProcessResult result = super.validate(vo, user);
+    public ProcessResult validate(ExampleSiteVO vo) {
+        ProcessResult result = super.validate(vo);
+        PermissionHolder user = Common.getUser();
         permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());
         permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission());
 
@@ -52,8 +55,9 @@ public class ExampleSiteService extends AbstractVOService<ExampleSiteVO, Example
     }
 
     @Override
-    public ProcessResult validate(ExampleSiteVO existing, ExampleSiteVO vo, PermissionHolder user) {
-        ProcessResult result = super.validate(existing, vo, user);
+    public ProcessResult validate(ExampleSiteVO existing, ExampleSiteVO vo) {
+        ProcessResult result = super.validate(existing, vo);
+        PermissionHolder user = Common.getUser();
 
         //Additional checks for existing list
         permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());

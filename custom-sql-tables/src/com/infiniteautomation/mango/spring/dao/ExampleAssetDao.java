@@ -27,6 +27,7 @@ import com.infiniteautomation.mango.example.sqlTables.db.tables.records.ExampleA
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleAssetVO;
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleSiteVO;
 import com.infiniteautomation.mango.permission.MangoPermission;
+import com.infiniteautomation.mango.spring.DaoDependencies;
 import com.infiniteautomation.mango.spring.MangoRuntimeContextConfiguration;
 import com.infiniteautomation.mango.spring.service.PermissionService;
 import com.serotonin.m2m2.Common;
@@ -36,11 +37,8 @@ import com.serotonin.m2m2.db.dao.AbstractVoDao;
 public class ExampleAssetDao extends AbstractVoDao<ExampleAssetVO, ExampleAssetsRecord, ExampleAssets> {
 
     @Autowired
-    private ExampleAssetDao(
-            @Qualifier(MangoRuntimeContextConfiguration.DAO_OBJECT_MAPPER_NAME) ObjectMapper mapper,
-            ApplicationEventPublisher publisher,
-            PermissionService permissionService) {
-        super(ExampleAssetAuditEventTypeDefinition.TYPE_NAME, ExampleAssets.EXAMPLE_ASSETS, mapper, publisher, permissionService);
+    private ExampleAssetDao(DaoDependencies dependencies) {
+        super(dependencies, ExampleAssetAuditEventTypeDefinition.TYPE_NAME, ExampleAssets.EXAMPLE_ASSETS);
     }
 
     @Override

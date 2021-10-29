@@ -19,6 +19,7 @@ import com.infiniteautomation.mango.example.sqlTables.db.tables.ExampleSites;
 import com.infiniteautomation.mango.example.sqlTables.db.tables.records.ExampleSitesRecord;
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleSiteVO;
 import com.infiniteautomation.mango.permission.MangoPermission;
+import com.infiniteautomation.mango.spring.DaoDependencies;
 import com.infiniteautomation.mango.spring.MangoRuntimeContextConfiguration;
 import com.infiniteautomation.mango.spring.service.PermissionService;
 import com.serotonin.m2m2.db.dao.AbstractVoDao;
@@ -29,12 +30,9 @@ public class ExampleSiteDao extends AbstractVoDao<ExampleSiteVO, ExampleSitesRec
     private final ExampleAccessCardDao accessCardDao;
 
     @Autowired
-    private ExampleSiteDao(
-            @Qualifier(MangoRuntimeContextConfiguration.DAO_OBJECT_MAPPER_NAME) ObjectMapper mapper,
-            ApplicationEventPublisher publisher,
-            PermissionService permissionService,
+    private ExampleSiteDao(DaoDependencies dependencies,
             ExampleAccessCardDao accessCardDao) {
-        super(ExampleSiteAuditEventTypeDefinition.TYPE_NAME, ExampleSites.EXAMPLE_SITES, mapper, publisher, permissionService);
+        super(dependencies, ExampleSiteAuditEventTypeDefinition.TYPE_NAME, ExampleSites.EXAMPLE_SITES);
         this.accessCardDao = accessCardDao;
     }
 

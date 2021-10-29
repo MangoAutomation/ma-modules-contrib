@@ -16,6 +16,7 @@ import com.infiniteautomation.mango.example.sqlTables.vo.ExampleSiteVO;
 import com.infiniteautomation.mango.spring.dao.ExampleAccessCardDao;
 import com.infiniteautomation.mango.util.exception.NotFoundException;
 import com.infiniteautomation.mango.util.exception.ValidationException;
+import com.serotonin.m2m2.Common;
 import com.serotonin.m2m2.i18n.ProcessResult;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
@@ -25,9 +26,10 @@ public class ExampleAccessCardService extends AbstractVOService<ExampleAccessCar
     private final ExampleSiteService siteService;
 
     @Autowired
-    public ExampleAccessCardService(ExampleAccessCardDao dao, PermissionService permissionService,
-                                    ExampleSiteService siteService) {
-        super(dao, permissionService);
+    public ExampleAccessCardService(ExampleAccessCardDao dao,
+                                    ExampleSiteService siteService,
+                                    ServiceDependencies dependencies) {
+        super(dao, dependencies);
         this.siteService = siteService;
     }
 
@@ -42,8 +44,9 @@ public class ExampleAccessCardService extends AbstractVOService<ExampleAccessCar
     }
 
     @Override
-    public ProcessResult validate(ExampleAccessCardVO vo, PermissionHolder user) {
-        ProcessResult result = super.validate(vo, user);
+    public ProcessResult validate(ExampleAccessCardVO vo) {
+        ProcessResult result = super.validate(vo);
+        PermissionHolder user = Common.getUser();
         permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission(), true);
         permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission(), true);
 
@@ -51,9 +54,10 @@ public class ExampleAccessCardService extends AbstractVOService<ExampleAccessCar
     }
 
     @Override
-    public ProcessResult validate(ExampleAccessCardVO existing, ExampleAccessCardVO vo, PermissionHolder user) {
-        ProcessResult result = super.validate(existing, vo, user);
+    public ProcessResult validate(ExampleAccessCardVO existing, ExampleAccessCardVO vo) {
+        ProcessResult result = super.validate(existing, vo);
 
+        PermissionHolder user = Common.getUser();
         //Additional checks for existing list
         permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission(), true);
         permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission(), true);

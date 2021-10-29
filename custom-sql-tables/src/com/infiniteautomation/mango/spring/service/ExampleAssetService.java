@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleAssetVO;
 import com.infiniteautomation.mango.spring.dao.ExampleAssetDao;
+import com.serotonin.m2m2.Common;
 import com.serotonin.m2m2.i18n.ProcessResult;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
@@ -20,8 +21,8 @@ import com.serotonin.m2m2.vo.permission.PermissionHolder;
 public class ExampleAssetService extends AbstractVOService<ExampleAssetVO, ExampleAssetDao> {
 
     @Autowired
-    public ExampleAssetService(ExampleAssetDao exampleSiteDao, PermissionService permissionService) {
-        super(exampleSiteDao, permissionService);
+    public ExampleAssetService(ExampleAssetDao exampleSiteDao, ServiceDependencies dependencies) {
+        super(exampleSiteDao, dependencies);
     }
 
     @Override
@@ -35,8 +36,9 @@ public class ExampleAssetService extends AbstractVOService<ExampleAssetVO, Examp
     }
 
     @Override
-    public ProcessResult validate(ExampleAssetVO vo, PermissionHolder user) {
-        ProcessResult result = super.validate(vo, user);
+    public ProcessResult validate(ExampleAssetVO vo) {
+        ProcessResult result = super.validate(vo);
+        PermissionHolder user = Common.getUser();
         permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());
         permissionService.validatePermission(result, "editPermission", user, vo.getEditPermission());
 
@@ -44,8 +46,9 @@ public class ExampleAssetService extends AbstractVOService<ExampleAssetVO, Examp
     }
 
     @Override
-    public ProcessResult validate(ExampleAssetVO existing, ExampleAssetVO vo, PermissionHolder user) {
-        ProcessResult result = super.validate(existing, vo, user);
+    public ProcessResult validate(ExampleAssetVO existing, ExampleAssetVO vo) {
+        ProcessResult result = super.validate(existing, vo);
+        PermissionHolder user = Common.getUser();
 
         //Additional checks for existing list
         permissionService.validatePermission(result, "readPermission", user, vo.getReadPermission());
