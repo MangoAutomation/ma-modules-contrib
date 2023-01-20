@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 
 import com.infiniteautomation.mango.example.ExamplePollingDataSourceDefinition;
 import com.infiniteautomation.mango.example.rt.ExamplePointLocatorRT;
-import com.serotonin.m2m2.DataTypes;
+import com.serotonin.m2m2.DataType;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataSource.PointLocatorRT;
 import com.serotonin.m2m2.vo.dataSource.AbstractPointLocatorVO;
@@ -46,8 +46,8 @@ public class ExamplePointLocatorVO extends AbstractPointLocatorVO<ExamplePointLo
      *   (Can be configurable or hard coded based on implementation)
      */
     @Override
-    public int getDataTypeId() {
-        return DataTypes.NUMERIC;
+    public DataType getDataType() {
+        return DataType.NUMERIC;
     }
 
     /*

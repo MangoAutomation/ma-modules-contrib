@@ -15,7 +15,6 @@ import com.infiniteautomation.mango.spring.MangoRuntimeContextConfiguration;
 import com.infiniteautomation.mango.twitter.TwitterClientTools;
 import com.infiniteautomation.mango.twitter.vo.TwitterDataSourceVO;
 import com.serotonin.m2m2.Common;
-import com.serotonin.m2m2.DataTypes;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataImage.DataPointRT;
 import com.serotonin.m2m2.rt.dataImage.PointValueTime;
@@ -68,14 +67,14 @@ public class TwitterDataSourceRT extends PollingDataSource<TwitterDataSourceVO> 
                 TwitterPointLocatorRT twitterPointLocatorRT = dataPointRT.getPointLocator();
 
 
-                switch (twitterPointLocatorRT.getVo().getDataTypeId()) {
-                    case DataTypes.NUMERIC:
-                    case DataTypes.BINARY:
-                    case DataTypes.MULTISTATE:
-                    case DataTypes.IMAGE:
+                switch (twitterPointLocatorRT.getVo().getDataType()) {
+                    case NUMERIC:
+                    case BINARY:
+                    case MULTISTATE:
+                    //case DataType.IMAGE:
                     default:
                         break;
-                    case DataTypes.ALPHANUMERIC:
+                    case ALPHANUMERIC:
                         if (!twitterPointLocatorRT.getClient().isDone()) {
                             String msg;
                             try {
