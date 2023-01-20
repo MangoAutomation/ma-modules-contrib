@@ -3,18 +3,18 @@
  */
 package com.infiniteautomation.mango.currencyConverter.vo;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import com.infiniteautomation.mango.currencyConverter.CurrencyConverterDataSourceDefinition;
 import com.infiniteautomation.mango.currencyConverter.rt.CurrencyConverterPointLocatorRT;
 import com.serotonin.json.spi.JsonProperty;
-import com.serotonin.m2m2.DataTypes;
+import com.serotonin.m2m2.DataType;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataSource.PointLocatorRT;
 import com.serotonin.m2m2.vo.dataSource.AbstractPointLocatorVO;
 import com.serotonin.util.SerializationHelper;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 /**
  * Class that contains the configuration settings for the point
@@ -57,8 +57,8 @@ public class CurrencyConverterPointLocatorVO extends AbstractPointLocatorVO<Curr
      *   (Can be configurable or hard coded based on implementation)
      */
     @Override
-    public int getDataTypeId() {
-        return DataTypes.NUMERIC;
+    public DataType getDataType() {
+        return DataType.NUMERIC;
     }
 
     @Override

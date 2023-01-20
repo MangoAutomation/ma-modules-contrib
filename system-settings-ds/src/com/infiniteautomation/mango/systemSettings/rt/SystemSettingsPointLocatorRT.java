@@ -6,7 +6,6 @@ package com.infiniteautomation.mango.systemSettings.rt;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.infiniteautomation.mango.systemSettings.vo.SystemSettingsPointLocatorVO;
-import com.serotonin.m2m2.DataTypes;
 import com.serotonin.m2m2.rt.dataImage.types.AlphanumericValue;
 import com.serotonin.m2m2.rt.dataImage.types.BinaryValue;
 import com.serotonin.m2m2.rt.dataImage.types.DataValue;
@@ -31,12 +30,12 @@ public class SystemSettingsPointLocatorRT extends PointLocatorRT<SystemSettingsP
 
     public DataValue getValue(JsonNode root) {
         JsonNode node = root.at(jsonPointer);
-        switch(vo.getDataTypeId()) {
-            case DataTypes.BINARY:
+        switch(vo.getDataType()) {
+            case BINARY:
                 return new BinaryValue(node.asBoolean());
-            case DataTypes.MULTISTATE:
+            case MULTISTATE:
                 return new MultistateValue((node.asInt()));
-            case DataTypes.ALPHANUMERIC:
+            case ALPHANUMERIC:
             default:
                 return new AlphanumericValue(node.asText());
         }

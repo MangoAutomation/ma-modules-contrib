@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>ma-modules-contrib</artifactId>
 		<groupId>com.infiniteautomation.mango</groupId>
-		<version>4.3.0-SNAPSHOT</version>
+		<version>4.5.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>twitter-ds</artifactId>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.infiniteautomation.mango</groupId>
 			<artifactId>mango-api</artifactId>
-			<version>4.2.0-SNAPSHOT</version>
+			<version>4.5.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Hosebird Client (hbc) A Java HTTP client for consuming Twitter's standard-->

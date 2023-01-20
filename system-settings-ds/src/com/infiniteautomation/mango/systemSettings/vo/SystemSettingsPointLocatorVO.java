@@ -15,7 +15,7 @@ import com.serotonin.json.ObjectWriter;
 import com.serotonin.json.spi.JsonProperty;
 import com.serotonin.json.spi.JsonSerializable;
 import com.serotonin.json.type.JsonObject;
-import com.serotonin.m2m2.DataTypes;
+import com.serotonin.m2m2.DataType;
 import com.serotonin.m2m2.i18n.TranslatableJsonException;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataSource.PointLocatorRT;
@@ -73,15 +73,15 @@ public class SystemSettingsPointLocatorVO extends AbstractPointLocatorVO<SystemS
      *   (Can be configurable or hard coded based on implementation)
      */
     @Override
-    public int getDataTypeId() {
+    public DataType getDataType() {
         switch(settingType) {
             case INTEGER:
-                return DataTypes.MULTISTATE;
+                return DataType.MULTISTATE;
             case BOOLEAN:
-                return DataTypes.BINARY;
+                return DataType.BINARY;
             case STRING:
             default:
-                return DataTypes.ALPHANUMERIC;
+                return DataType.ALPHANUMERIC;
         }
     }
 

@@ -17,7 +17,7 @@ import com.serotonin.json.ObjectWriter;
 import com.serotonin.json.spi.JsonProperty;
 import com.serotonin.json.spi.JsonSerializable;
 import com.serotonin.json.type.JsonObject;
-import com.serotonin.m2m2.DataTypes;
+import com.serotonin.m2m2.DataType;
 import com.serotonin.m2m2.i18n.TranslatableMessage;
 import com.serotonin.m2m2.rt.dataSource.PointLocatorRT;
 import com.serotonin.m2m2.vo.dataSource.AbstractPointLocatorVO;
@@ -64,7 +64,7 @@ public class TwitterPointLocatorVO extends AbstractPointLocatorVO<TwitterPointLo
      *   (Can be configurable or hard coded based on implementation)
      */
     @Override
-    public int getDataTypeId() { return DataTypes.ALPHANUMERIC; }
+    public DataType getDataType() { return DataType.ALPHANUMERIC; }
 
     @Override
     public boolean isSettable() {
