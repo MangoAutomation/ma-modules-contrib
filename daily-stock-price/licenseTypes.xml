@@ -1,0 +1,9 @@
+<licenseTypes>
+    <licenseType id="Free">
+    	<description>Restricted to 2 data points.</description>
+    	<price>0</price>
+    	<features>
+    		<dataPointLimit>2</dataPointLimit>
+    	</features>
+    </licenseType>
+</licenseTypes>

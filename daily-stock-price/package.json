@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "@infinite-automation/dialyStockPrice",
+  "version": "4.3.0-SNAPSHOT",
+  "description": "Daily Stock Price data source, daily gets price of the configure stock symbols",
+  "main": "web/angular/dailyStockPrice.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@infinite-automation/mango-client": "^0.6.0",
+    "@infinite-automation/mango-module-tools": "~1.2.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "tmp": "^0.0.33"
+  },
+  "scripts": {
+    "webpack": "webpack --config webpack.config.js"
+  },
+  "author": "Manuel Calvo <manuel.calvo@radixiot.com>",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infiniteautomation/mango-modules-contrib.git"
+  },
+  "com_infiniteautomation": {
+    "moduleName": "dialyStockPrice"
+  }
+}
