@@ -22,12 +22,9 @@ import com.serotonin.util.SerializationHelper;
 public class DailyStockPricePointLocatorVO extends AbstractPointLocatorVO<DailyStockPricePointLocatorVO> {
 
     @JsonProperty
-    private boolean settable;
+    private boolean settable = false;
     @JsonProperty
-    private double initialValue = 0;
-
-    @JsonProperty
-    private String stockSymbol = "TSLA";
+    private String stockSymbol = "";
 
 
     /*
@@ -57,22 +54,9 @@ public class DailyStockPricePointLocatorVO extends AbstractPointLocatorVO<DailyS
     }
 
     @Override
-    public boolean isSettable() {
-        return settable;
-    }
+    public boolean isSettable() {return settable;}
 
-    public void setSettable(boolean settable) {
-        this.settable = settable;
-    }
-
-
-    public double getInitialValue() {
-        return initialValue;
-    }
-
-    public void setInitialValue(double initialValue) {
-        this.initialValue = initialValue;
-    }
+    public void setSettable(boolean settable) {this.settable = settable;}
 
     public String getStockSymbol() {
         return stockSymbol;
@@ -92,14 +76,12 @@ public class DailyStockPricePointLocatorVO extends AbstractPointLocatorVO<DailyS
     private static final int version = 1;
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeInt(version);
-        out.writeDouble(initialValue);
         SerializationHelper.writeSafeUTF(out, stockSymbol);
     }
 
     private void readObject(ObjectInputStream in) throws IOException {
         int version = in.readInt();
         if(version == 1) {
-            initialValue = in.readDouble();
             stockSymbol = SerializationHelper.readSafeUTF(in);
         }
     }

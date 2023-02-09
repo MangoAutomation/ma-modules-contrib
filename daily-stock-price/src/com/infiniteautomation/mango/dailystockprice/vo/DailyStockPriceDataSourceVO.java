@@ -17,8 +17,10 @@ import com.serotonin.m2m2.vo.event.EventTypeVO;
 import com.serotonin.util.SerializationHelper;
 
 /**
- * This datasouce uses this free API https://www.alphavantage.co/documentation/#latestprice
- * to get the daily prices of stocks.
+ * This datasouce uses this free API
+ * <a href="https://www.alphavantage.co/documentation/#latestprice">
+ *     https://www.alphavantage.co/documentation/#latestprice
+ * </a> to get the daily prices of stocks.
  */
 public class DailyStockPriceDataSourceVO extends PollingDataSourceVO {
 

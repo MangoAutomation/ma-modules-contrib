@@ -9,8 +9,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>daily-stock-price</artifactId>
-	<version>4.3.0-SNAPSHOT</version>
-	<name>dialyStockPrice</name>
+	<version>4.5.0-SNAPSHOT</version>
+	<name>dailyStockPrice</name>
 	<description>Daily Stock Price data source, daily gets price of the configure stock symbols</description>
 	<build>
         <plugins>

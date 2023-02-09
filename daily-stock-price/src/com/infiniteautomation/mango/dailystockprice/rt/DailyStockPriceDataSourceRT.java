@@ -5,6 +5,7 @@ package com.infiniteautomation.mango.dailystockprice.rt;
 
 import static com.infiniteautomation.mango.dailystockprice.vo.DailyStockPriceDataSourceVO.DATA_SOURCE_EXCEPTION_EVENT;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,12 +26,13 @@ import com.serotonin.m2m2.rt.dataSource.PollingDataSource;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.squareup.okhttp.ResponseBody;
 
-public class DailyStockPriceDataSourceRT
-        extends PollingDataSource<DailyStockPriceDataSourceVO> {
+public class DailyStockPriceDataSourceRT extends PollingDataSource<DailyStockPriceDataSourceVO> {
 
-    protected final Log LOG = LogFactory.getLog(DailyStockPriceDataSourceRT.class);
+    protected final Log logger = LogFactory.getLog(DailyStockPriceDataSourceRT.class);
     private PolledValues polledValues;
+
 
     public DailyStockPriceDataSourceRT(DailyStockPriceDataSourceVO vo) {
         super(vo);
@@ -39,9 +41,16 @@ public class DailyStockPriceDataSourceRT
 
     @Override
     public void initialize() {
+        logger.debug("Initializing " + this.getClass());
         super.initialize();
         polledValues = new PolledValues();
         polledValues.init(vo);
+    }
+
+
+    @Override
+    public void forcePointRead(DataPointRT dpRT) {
+        readPoint(dpRT, System.currentTimeMillis());
     }
 
 
@@ -54,16 +63,23 @@ public class DailyStockPriceDataSourceRT
         polledValues.newPoll();
 
         for (DataPointRT dpRT : dataPoints) {
-            DailyStockPricePointLocatorRT plRT = dpRT.getPointLocator();
-
-            try {
-                dpRT.updatePointValue(new PointValueTime(plRT.getValue(polledValues), scheduledPollTime));
-            } catch (Exception e) {
-                raiseEvent(DATA_SOURCE_EXCEPTION_EVENT, System.currentTimeMillis(), true,
-                        new TranslatableMessage("literal", "Event Raised"));
-            }
+            readPoint(dpRT, scheduledPollTime);
         }
     }
+
+
+    private void readPoint(DataPointRT dpRT, long pollTime) {
+        DailyStockPricePointLocatorRT plRT = dpRT.getPointLocator();
+
+        try {
+            dpRT.updatePointValue(new PointValueTime(plRT.getValue(polledValues), pollTime));
+
+        } catch (Exception e) {
+            raiseEvent(DATA_SOURCE_EXCEPTION_EVENT, System.currentTimeMillis(), true,
+                    new TranslatableMessage("literal", "Event Raised"));
+        }
+    }
+
 
     /*
      * When a point is set externally (via the UI) this method is called 
@@ -74,7 +90,8 @@ public class DailyStockPriceDataSourceRT
         dprt.setPointValue(valueToSet, source);
     }
 
-    public class PolledValues {
+
+    public static class PolledValues {
         private static final String SERVICE_URL_TEMPLATE = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=%s&apikey=%s";
         private OkHttpClient client;
         private String apiKey;
@@ -93,20 +110,24 @@ public class DailyStockPriceDataSourceRT
             cachedValues.clear();
         }
 
-        public DataValue getValue(DailyStockPricePointLocatorVO vo) throws Exception {
+        public DataValue getValue(DailyStockPricePointLocatorVO vo) throws IOException {
             DataValue dataValue = cachedValues.get(vo.getStockSymbol());
 
             if (dataValue == null) {
                 String serviceURL = String.format(SERVICE_URL_TEMPLATE, vo.getStockSymbol(), this.apiKey);
                 Request request = new Request.Builder().url(serviceURL).get().build();
                 Response response = client.newCall(request).execute();
-                JsonNode jsonNode = objectMapper.readTree(response.toString());
-                Double price = jsonNode.get("Global Quote").get("05. price").asDouble();
-                dataValue = new NumericValue(price);
+
+                try (
+                    ResponseBody rb = response.body()
+                ) {
+                    JsonNode jsonNode = objectMapper.readTree(rb.string());
+                    double price = jsonNode.get("Global Quote").get("05. price").asDouble();
+                    dataValue = new NumericValue(price);
+                }
             }
 
             return dataValue;
         }
     }
-
 }

@@ -9,15 +9,10 @@ import com.infiniteautomation.mango.rest.latest.model.dataPoint.AbstractPointLoc
 public class DailyStockPricePointLocatorModel extends AbstractPointLocatorModel<DailyStockPricePointLocatorVO> {
 
     public static final String TYPE_NAME = "PL.DAILY_STOCK_PRICE";
-
-    private double initialValue;
-
     private String stockSymbol;
 
 
-    public DailyStockPricePointLocatorModel() {
-
-    }
+    public DailyStockPricePointLocatorModel() {}
 
     public DailyStockPricePointLocatorModel(DailyStockPricePointLocatorVO data) {
         super(data);
@@ -26,14 +21,6 @@ public class DailyStockPricePointLocatorModel extends AbstractPointLocatorModel<
     @Override
     public String getModelType() {
         return TYPE_NAME;
-    }
-
-    public double getInitialValue() {
-        return initialValue;
-    }
-
-    public void setInitialValue(double initialValue) {
-        this.initialValue = initialValue;
     }
 
     public String getStockSymbol() {
@@ -53,7 +40,6 @@ public class DailyStockPricePointLocatorModel extends AbstractPointLocatorModel<
     public DailyStockPricePointLocatorVO toVO() {
         DailyStockPricePointLocatorVO vo = new DailyStockPricePointLocatorVO();
         vo.setSettable(settable);
-        vo.setInitialValue(initialValue);
         vo.setStockSymbol(stockSymbol);
         return vo;
     }
@@ -66,7 +52,7 @@ public class DailyStockPricePointLocatorModel extends AbstractPointLocatorModel<
     @Override
     public void fromVO(DailyStockPricePointLocatorVO vo) {
         super.fromVO(vo);
-        initialValue = vo.getInitialValue();
+        settable = vo.isSettable();
         stockSymbol = vo.getStockSymbol();
     }
 
