@@ -1,0 +1,13 @@
+<licenseTypes>
+	<licenseType id="paid" status="normal">
+		<description>No restrictions.</description>
+		<price>10</price>
+	</licenseType>
+	<licenseType id="Free">
+		<description>Restricted to 5 data points.</description>
+		<price>0</price>
+		<features>
+			<dataPointLimit>5</dataPointLimit>
+		</features>
+	</licenseType>
+</licenseTypes>

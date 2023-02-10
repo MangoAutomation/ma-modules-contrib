@@ -1,0 +1,17 @@
+<h3>
+    <span ma-tr="dsp.datapoint.description"></span>
+    <md-button class="md-icon-button ma-small-button ma-no-margin" ui-sref="ui.help.dailyStockPriceDataPoint">
+        <md-icon>help</md-icon>
+    </md-button>
+</h3>
+
+<div layout="row" layout-wrap layout-align="space-between start" class="ma-inputs-container">
+    <md-input-container flex="100" flex-gt-md="50">
+        <label ma-tr="dsp.datapoint.stockSymbol"></label>
+        <input name="stockSymbol" ng-model="$ctrl.dataPoint.pointLocator.stockSymbol" required ma-get-ctrl="stockSymbolModelCtrl = $ngModel">
+        <div ng-messages="stockSymbolModelCtrl.$error">
+            <div ng-message="required" ma-tr="validate.required"></div>
+            <div ng-message="validationMessage" ng-bind="stockSymbolModelCtrl.validationMessage"></div>
+        </div>
+    </md-input-container>
+</div>

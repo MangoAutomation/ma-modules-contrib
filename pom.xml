@@ -33,6 +33,7 @@
         <module>currency-converter</module>
         <module>custom-sql-tables</module>
         <module>twitter-ds</module>
+        <module>daily-stock-price</module>
     </modules>
     <repositories>
         <repository>
