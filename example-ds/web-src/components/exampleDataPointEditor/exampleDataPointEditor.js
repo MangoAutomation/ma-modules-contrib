@@ -1,6 +1,5 @@
 /**
- * @copyright 2019 {@link http://infiniteautomation.com|Infinite Automation Systems, Inc.} All rights reserved.
- * @author Terry Packer
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 import exampleDataPointEditor from './exampleDataPointEditor.html';

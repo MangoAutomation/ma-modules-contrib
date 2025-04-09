@@ -1,6 +1,5 @@
-/**
- * @copyright 2021 {@link http://radixiot.com|Radix IoT Inc.} All rights reserved.
- * @author Terry Packer
+/*
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 import systemSettingsDataSourceEditor from './systemSettingsDataSourceEditor.html';

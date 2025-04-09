@@ -1,10 +1,8 @@
-/**
- * @copyright 2019 {@link http://infiniteautomation.com|Infinite Automation Systems, Inc.} All rights reserved.
- * @author Benjamin Perez
+/*
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 import template from './twitterDataPointEditor.html';
-
 
 class TwitterDataPointEditorController {
     static get $$ngIsClass() {

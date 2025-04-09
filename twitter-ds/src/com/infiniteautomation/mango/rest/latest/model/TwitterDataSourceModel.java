@@ -1,8 +1,7 @@
 /*
- * Copyright (C) 2021 RadixIot LLC. All rights reserved.
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.rest.latest.model;
-
 
 import com.infiniteautomation.mango.rest.latest.model.datasource.AbstractPollingDataSourceModel;
 import com.infiniteautomation.mango.twitter.TwitterDataSourceDefinition;

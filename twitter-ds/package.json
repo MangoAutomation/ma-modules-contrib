@@ -1,14 +1,12 @@
 {
   "private": true,
   "name": "@infinite-automation/twitterDataSource",
-  "version": "4.2.0-SNAPSHOT",
+  "version": "4.5.0-SNAPSHOT",
   "description": "This data source gets real world information from Twitter based on some keywords",
   "main": "web/twitterDataSource.js",
-  "dependencies": {
-    "chai": "^4.3.4"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@infinite-automation/mango-module-tools": "^2.1.0"
+    "@infinite-automation/mango-module-tools": "^2.7.2"
   },
   "scripts": {
     "webpack": "webpack --config webpack.config.js"
@@ -17,7 +15,7 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/infiniteautomation/mango-modules-contrib.git"
+    "url": "https://github.com/MangoAutomation/ma-modules-contrib.git"
   },
   "com_infiniteautomation": {
     "moduleName": "twitterDataSource"

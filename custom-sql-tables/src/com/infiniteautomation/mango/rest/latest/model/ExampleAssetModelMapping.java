@@ -45,7 +45,7 @@ public class ExampleAssetModelMapping implements RestModelMapping<ExampleAssetVO
 
         model.setData(vo.getData());
 
-        model.setSiteXid(vo.getSiteXid());
+        model.setSiteXid(dao.getXidById(vo.getSiteId()));
         model.setSiteName(vo.getSiteName());
         return model;
     }

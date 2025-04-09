@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
+ */
+
 import angular from 'angular';
 import twitterDataSourceEditor from './components/twitterDataSourceEditor/twitterDataSourceEditor';
 import twitterDataPointEditor from './components/twitterDataPointEditor/twitterDataPointEditor';

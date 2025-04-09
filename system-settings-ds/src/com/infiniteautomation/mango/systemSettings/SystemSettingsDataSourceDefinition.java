@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2019  Infinite Automation Software. All rights reserved.
+/*
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.systemSettings;
 
@@ -46,7 +46,7 @@ public class SystemSettingsDataSourceDefinition extends PollingDataSourceDefinit
      */
     @Override
     public String getDescriptionKey() {
-        return "example.datasource.polling.description";
+        return "systemSettings.datasource.description";
     }
 
     @Override

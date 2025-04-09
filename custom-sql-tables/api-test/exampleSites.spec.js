@@ -1,94 +1,88 @@
 /**
- * Copyright 2021 Radix IoT Inc.
- * https://www.radixiot.com/
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
-const testHelper = require('@infinite-automation/mango-module-tools/test-helper/testHelper');
-const {createClient, uuid, defer, delay, assertValidationErrors, login} = testHelper;
+const {
+    createClient,
+    uuid,
+    defer,
+    delay,
+    login
+} = require('@infinite-automation/mango-module-tools/test-helper/testHelper');
 const client = createClient();
 
-describe('Example sites ', function() {
-    before('Login', function() { return login.call(this, client); });
+describe('Example sites ', function () {
+    before('Login', function () {
+        return login.call(this, client);
+    });
 
-     function newSite(){
+    function newSite() {
         return {
             xid: uuid(),
             name: 'Test site',
             readPermission: ['anonymous', 'user'],
             editPermission: ['user'],
             data: 'test'
-          };
+        };
     };
 
-    function assertSite(saved, local){
+    function assertSite(saved, local) {
         assert.equal(saved.xid, local.xid);
         assert.equal(saved.name, local.name);
 
         assert.lengthOf(saved.readPermission, local.readPermission.length);
-        for(let i=0; i<saved.readPermission.length; i++)
+        for (let i = 0; i < saved.readPermission.length; i++)
             assert.include(local.readPermission, saved.readPermission[i]);
 
         assert.lengthOf(saved.editPermission, local.editPermission.length);
-        for(let i=0; i<saved.editPermission.length; i++)
+        for (let i = 0; i < saved.editPermission.length; i++)
             assert.include(local.editPermission, saved.editPermission[i]);
 
         assert.equal(saved.data, local.data);
     }
-    
+
     it('Create site', () => {
-    const site = newSite();
-      return client.restRequest({
-          path: '/rest/latest/example-sites',
-          method: 'POST',
-          data: site
-      }).then((response) => {
-          assertSite(response.data, site);
-      }).finally(() => {
+        const site = newSite();
         return client.restRequest({
-             path: `/rest/latest/example-sites/${site.xid}`,
-             method: 'DELETE'
-          });
-      });
+            path: '/rest/latest/example-sites',
+            method: 'POST',
+            data: site
+        }).then((response) => {
+            assertSite(response.data, site);
+        }).finally(() => {
+            return client.restRequest({
+                path: `/rest/latest/example-sites/${site.xid}`,
+                method: 'DELETE'
+            });
+        });
     });
 
     it('Update site', () => {
-    const site = newSite();
-      return client.restRequest({
-          path: '/rest/latest/example-sites',
-          method: 'POST',
-          data: site
-      }).then((response) => {
-          assertSite(response.data, site);
-          //Modify a little
-          site.name = 'New name';
-          return client.restRequest({
+        const site = newSite();
+        return client.restRequest({
+            path: '/rest/latest/example-sites',
+            method: 'POST',
+            data: site
+        }).then((response) => {
+            assertSite(response.data, site);
+            //Modify a little
+            site.name = 'New name';
+            return client.restRequest({
                 path: `/rest/latest/example-sites/${site.xid}`,
                 method: 'PUT',
                 data: site
-          }).then((response) => {
+            }).then((response) => {
                 assertSite(response.data, site);
-          });
-      }).finally(() => {
-        return client.restRequest({
-             path: `/rest/latest/example-sites/${site.xid}`,
-             method: 'DELETE'
-          });
-      });
+            });
+        }).finally(() => {
+            return client.restRequest({
+                path: `/rest/latest/example-sites/${site.xid}`,
+                method: 'DELETE'
+            });
+        });
     });
 
-    it('Gets websocket notifications for update', function() {
+    it('Gets websocket notifications for update', function () {
 
         let ws;
         const subscription = {
@@ -122,15 +116,15 @@ describe('Example sites ', function() {
             });
 
             ws.on('message', msgStr => {
-                try{
+                try {
                     assert.isString(msgStr);
                     const msg = JSON.parse(msgStr);
-                    if(msg.payload.action === 'update') {
+                    if (msg.payload.action === 'update') {
                         assert.strictEqual(msg.status, 'OK');
                         assert.strictEqual(msg.payload.object.xid, site.xid);
                         listUpdatedDeferred.resolve();
                     }
-                }catch(e){
+                } catch (e) {
                     listUpdatedDeferred.reject(e);
                 }
             });
@@ -161,10 +155,10 @@ describe('Example sites ', function() {
                     data: site
                 });
             });
-        }).then(() => listUpdatedDeferred.promise).then((r)=>{
+        }).then(() => listUpdatedDeferred.promise).then((r) => {
             ws.close();
             return r;
-        },e => {
+        }, e => {
             ws.close();
             return Promise.reject(e);
         });

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 RadixIot LLC. All rights reserved.
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.rest.latest;
 
@@ -10,7 +10,6 @@ import com.infiniteautomation.mango.rest.latest.model.RestModelMapper;
 import com.infiniteautomation.mango.rest.latest.model.TwitterPointLocatorModel;
 import com.infiniteautomation.mango.twitter.vo.TwitterPointLocatorVO;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
-
 
 /**
  * This class is used to map the VO to and from a REST Model
