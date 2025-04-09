@@ -7,17 +7,17 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.message.BasicHeader;
+import org.apache.hc.core5.http.protocol.BasicHttpContext;
+import org.apache.hc.core5.http.protocol.HttpContext;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +35,7 @@ import com.serotonin.m2m2.rt.dataSource.PollingDataSource;
  * @author Terry Packer
  *
  */
-public class SystemSettingsDataSourceRT extends PollingDataSource<SystemSettingsDataSourceVO> implements ResponseHandler<Void> {
+public class SystemSettingsDataSourceRT extends PollingDataSource<SystemSettingsDataSourceVO> implements HttpClientResponseHandler<Void> {
 
     protected final Log LOG = LogFactory.getLog(SystemSettingsDataSourceRT.class);
 
@@ -44,7 +44,7 @@ public class SystemSettingsDataSourceRT extends PollingDataSource<SystemSettings
     public static final int DATA_SOURCE_EXCEPTION = 2;
 
     private final ObjectMapper mapper;
-    private HttpClient client;
+    private CloseableHttpClient client;
     private HttpGet request;
     private boolean failed;
 
@@ -73,7 +73,7 @@ public class SystemSettingsDataSourceRT extends PollingDataSource<SystemSettings
             try {
                 HttpContext localContext = new BasicHttpContext();
                 localContext.setAttribute("TIMESTAMP", scheduledPollTime);
-                client.execute(this.request, this, localContext);
+                client.execute(this.request, localContext, this);
 
                 //Only RTN active events for performance, we won't get here if an exception is thrown
                 if(failed) {
@@ -110,7 +110,7 @@ public class SystemSettingsDataSourceRT extends PollingDataSource<SystemSettings
     }
 
     @Override
-    public Void handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+    public Void handleResponse(ClassicHttpResponse httpResponse) throws ParseException, IOException {
 
         //Make request
         HttpEntity responseEntity = httpResponse.getEntity();

@@ -29,7 +29,8 @@ public class ExampleAssetWebsocketHandler extends DaoNotificationWebSocketHandle
     private final RestModelMapper mapper;
 
     @Autowired
-    public ExampleAssetWebsocketHandler(ExampleAssetService service, ExampleAssetModelMapping mapping, RestModelMapper mapper) {
+    public ExampleAssetWebsocketHandler(MangoWebSocketHandlerConfig config, ExampleAssetService service, ExampleAssetModelMapping mapping, RestModelMapper mapper) {
+        super(config);
         this.service = service;
         this.mapping = mapping;
         this.mapper = mapper;

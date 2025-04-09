@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@infinite-automation/mango-client@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@infinite-automation/mango-client/-/mango-client-1.2.1.tgz#2e0e241f61e37fd71b9f68ef0599b7456b98e9b6"
-  integrity sha512-+o7wQqjB8o2rrRKM4s9XcS4JOQ9DBLpCQyF20nEyL8ev7JzDIQb2YD2knstLl8/fDXJWdYStFywX/S6PTykomA==
+"@radixiot/mango-client@^1.2.2":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@radixiot/mango-client/-/mango-client-1.3.1.tgz#ba274f32055a7b7fad453b4a533103a2f67a8dc8"
+  integrity sha512-gK1ghbYNil06ZPnLJdBacT9XVNYixeU4t+eBpk/EKeGz29Hi0djHqgHMRxC9tlTvJKj804GjNpD6eUqv/wRVCQ==
   dependencies:
     form-data "^2.3.0"
     moment "^2.19.0"
@@ -13,12 +13,12 @@
     uuid "^3.1.0"
     ws ">=4 <7"
 
-"@infinite-automation/mango-module-tools@^2.7.2":
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/@infinite-automation/mango-module-tools/-/mango-module-tools-2.7.2.tgz#b260f929030ca0844d4c2515fe6c2c7d2c00a321"
-  integrity sha512-QXXSse9EWYn8OBMTHQNhVWUnyAgvHtUnfce/wnkxWVL2oTbbAP5Qv4gjZFT0y9RBI8ZQi8VvYZYh7xOYO3AFeg==
+"@radixiot/mango-module-tools@^2.7.3":
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/@radixiot/mango-module-tools/-/mango-module-tools-2.7.3.tgz#a7b615f55340d5fcf9a9f3ef29e39eb70a7a93e0"
+  integrity sha512-WERjikjHn0OZldsJIRz9Uc+lIYKYqDgcdvfF+8IzeeO0wNpvMOzRshcKRRl0Qk0eMyN1bxAbxKm+R5dWzI2E3A==
   dependencies:
-    "@infinite-automation/mango-client" "^1.2.1"
+    "@radixiot/mango-client" "^1.2.2"
     chai "^4.2.0"
     clean-webpack-plugin "^3.0.0"
     copy-webpack-plugin "^5.1.1"

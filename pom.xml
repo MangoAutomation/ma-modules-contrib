@@ -8,23 +8,33 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <groupId>com.radixiot.mango</groupId>
         <artifactId>modules-parent</artifactId>
-        <groupId>com.infiniteautomation.mango</groupId>
-        <version>4.5.7-SNAPSHOT</version>
-        <relativePath>../ma-core-public/Modules/pom.xml</relativePath>
+        <version>5.5.0</version> <!-- mango.version -->
+        <relativePath/>
     </parent>
+    <properties>
+        <moduleOutputDirectory>${project.parent.build.directory}</moduleOutputDirectory>
+        <zipAssemblyName>m2m2-${project.name}-${project.version}</zipAssemblyName>
+
+        <revision>5.5.0-SNAPSHOT</revision>
+        <!-- revision will be used by all modules during the release -->
+        <!-- <revision>5.5.0-contrib.1</revision> -->
+        <!-- <revision>5.5.0-contrib.2</revision> -->
+    </properties>
+    <version>${revision}</version>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ma-modules-contrib</artifactId>
     <packaging>pom</packaging>
     <name>Mango Contributed Modules</name>
     <issueManagement>
         <system>github</system>
-        <url>https://github.com/MangoAutomation/ma-modules-contrib/issues</url>
+        <url>https://github.com/RadixIoT/ma-modules-contrib/issues</url>
     </issueManagement>
     <scm>
-        <connection>scm:git:https://github.com/MangoAutomation/ma-modules-contrib.git</connection>
-        <developerConnection>scm:git:https://github.com/MangoAutomation/ma-modules-contrib.git</developerConnection>
-        <url>https://github.com/MangoAutomation/ma-modules-contrib</url>
+        <connection>scm:git:https://github.com/RadixIoT/ma-modules-contrib.git</connection>
+        <developerConnection>scm:git:https://github.com/RadixIoT/ma-modules-contrib.git</developerConnection>
+        <url>https://github.com/RadixIoT/ma-modules-contrib</url>
         <tag>HEAD</tag>
     </scm>
     <modules>
@@ -36,32 +46,41 @@
         <module>daily-stock-price</module>
     </modules>
     <repositories>
+        <!--ma-shared-->
         <repository>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>ias-snapshots</id>
-            <url>https://maven.mangoautomation.net/repository/ias-snapshot/</url>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
             <id>ias-releases</id>
             <url>https://maven.mangoautomation.net/repository/ias-release/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+        <!--mango-parent-->
+        <!--modules-parent-->
+        <!--mango-->
+        <!--mango-api-->
+        <!--mango-protobuf-->
+        <!--grpc-web-parent-->
+        <!--grpc-web-proxy-->
+        <repository>
+            <id>github-radixiot</id>
+            <url>https://maven.pkg.github.com/radixiot/maven</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
+        <!--mango-jooq-maven-plugin-->
         <pluginRepository>
             <id>ias-releases</id>
-            <snapshots><enabled>false</enabled></snapshots>
             <url>https://maven.mangoautomation.net/repository/ias-release/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </pluginRepository>
+        <!--assembly-descriptors-->
+        <pluginRepository>
+            <id>github-radixiot</id>
+            <url>https://maven.pkg.github.com/radixiot/maven</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
 </project>

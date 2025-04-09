@@ -16,14 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.infiniteautomation.mango.spring.service.TwitterToolsService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * @author Benjamin Perez
  */
-@Api(value = "Twitter Tools") @RestController @RequestMapping("/twitter")
+@Tag(name = "Twitter Tools")
+@RestController
+@RequestMapping("/twitter")
 public class TwitterToolsRestController {
     private final Logger log = LoggerFactory.getLogger(TwitterToolsRestController.class);
     private final TwitterToolsService service;
@@ -34,14 +36,14 @@ public class TwitterToolsRestController {
         this.service = service;
     }
 
-    @ApiOperation(value = "Get tweets", notes = "Must have permission to edit the data source")
+    @Operation(summary = "Get tweets", description = "Must have permission to edit the data source")
     @RequestMapping(method = RequestMethod.GET, value = "/tweets/{xid}")
     public List<String> getTweets(
-            @ApiParam(value = "XID of Data Source", required = true, allowMultiple = false)
+            @Parameter(description = "XID of Data Source", required = true)
             @PathVariable String xid,
-            @ApiParam(name = "tweetCount", value = "Tweet count", required = false, allowMultiple = false)
+            @Parameter(name = "tweetCount", description = "Tweet count", required = false)
             @RequestParam(required = false, defaultValue = "1") int tweetCount,
-            @ApiParam(value = "Tweet filters", required = true, allowMultiple = false)
+            @Parameter(description = "Tweet filters", required = true)
             @RequestParam(name = "tweetFilter", required = false) List<String> tweetFilter) {
         return service.getTweets(xid, tweetCount, tweetFilter);
 

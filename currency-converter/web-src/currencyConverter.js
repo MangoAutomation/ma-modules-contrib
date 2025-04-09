@@ -67,13 +67,13 @@ const currencyConverterModule = angular
             });
             maUiMenuProvider.registerMenuItems([
                 {
-                    name: 'ui.help.currencyConverterDataSource',
+                    name: 'ui.helps.help.currencyConverterDataSource',
                     url: '/currency-converter-data-source',
                     menuTr: 'cc.datasource.description',
                     template: dsHelpTemplate
                 },
                 {
-                    name: 'ui.help.currencyConverterDataPoint',
+                    name: 'ui.helps.help.currencyConverterDataPoint',
                     url: '/currency-converter-data-point',
                     menuTr: 'cc.datapoint.description',
                     template: dpHelpTemplate

@@ -8,7 +8,7 @@ const {
     defer,
     delay,
     login
-} = require('@infinite-automation/mango-module-tools/test-helper/testHelper');
+} = require('@radixiot/mango-module-tools/test-helper/testHelper');
 const client = createClient();
 
 describe('Example sites ', function () {

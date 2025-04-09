@@ -78,13 +78,13 @@ const twitterModule = angular
             });
             maUiMenuProvider.registerMenuItems([
                 {
-                    name: 'ui.help.twitterDataSource',
+                    name: 'ui.helps.help.twitterDataSource',
                     url: '/twitter-data-source',
                     menuTr: 'twitter.datasource.description',
                     template: dsHelpTemplate
                 },
                 {
-                    name: 'ui.help.twitterDataPoint',
+                    name: 'ui.helps.help.twitterDataPoint',
                     url: '/twitter-data-point',
                     menuTr: 'twitter.datapoint.description',
                     template: dpHelpTemplate
