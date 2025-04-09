@@ -1,5 +1,5 @@
 /**
- * @copyright 2019 {@link http://infiniteautomation.com|Infinite Automation Systems, Inc.} All rights reserved.
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 import dailyStockPriceDataSourceEditor from './dailyStockPriceDataSourceEditor.html';

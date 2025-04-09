@@ -1,6 +1,5 @@
 /**
- * @copyright 2021 {@link https://radixiot.com|Radix IoT, Inc.} All rights reserved.
- * @author Terry Packer
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 import angular from 'angular';
@@ -15,10 +14,11 @@ customSqlTablesModule.config([
             {
                 name: 'ui.customSqlTables',
                 url: '/custom-sql-tables',
-                menuText: 'Stallion map view',
-                menuHidden: true,
-                menuIcon: 'location_on',
-                weight: 800
+                menuText: 'Custom SQL tables',
+                template: '<ma-sql-console></ma-sql-console>',
+                menuHidden: false,
+                menuIcon: 'table_view',
+                permission: ['superadmin']
             }]);
     }
 ]);

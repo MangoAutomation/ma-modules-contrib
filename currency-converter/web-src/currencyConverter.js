@@ -1,6 +1,5 @@
 /**
- * @copyright 2019 {@link http://infiniteautomation.com|Infinite Automation Systems, Inc.} All rights reserved.
- * @author Pier Puccini
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 import angular from 'angular';
