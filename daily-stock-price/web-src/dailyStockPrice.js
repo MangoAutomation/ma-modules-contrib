@@ -66,13 +66,13 @@ const dailyStockPriceModule = angular
             });
             maUiMenuProvider.registerMenuItems([
                 {
-                    name: 'ui.help.dailyStockPriceDataSource',
+                    name: 'ui.helps.help.dailyStockPriceDataSource',
                     url: '/daily-stock-price-data-source',
                     menuTr: 'dsp.datasource.description',
                     template: dsHelpTemplate
                 },
                 {
-                    name: 'ui.help.dailyStockPriceDataPoint',
+                    name: 'ui.helps.help.dailyStockPriceDataPoint',
                     url: '/daily-stock-price-data-point',
                     menuTr: 'dsp.datapoint.description',
                     template: dpHelpTemplate

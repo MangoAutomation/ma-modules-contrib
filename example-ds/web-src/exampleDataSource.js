@@ -60,13 +60,13 @@ const examplePollingDataSourceModule = angular.module('maExamplePollingDataSourc
     });
     maUiMenuProvider.registerMenuItems([
         {
-            name: 'ui.help.examplePollingDataSource',
+            name: 'ui.helps.help.examplePollingDataSource',
             url: '/example-polling-data-source',
             menuTr: 'example.datasource.polling.description',
             template: dsHelpTemplate
         },
         {
-            name: 'ui.help.exampleDataPoint',
+            name: 'ui.helps.help.exampleDataPoint',
             url: '/example-data-point',
             menuTr: 'example.datapoint.description',
             template: dpHelpTemplate

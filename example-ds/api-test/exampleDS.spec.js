@@ -2,7 +2,7 @@
  * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
-const {login, createClient} = require('@infinite-automation/mango-module-tools/test-helper/testHelper');
+const {login, createClient} = require('@radixiot/mango-module-tools/test-helper/testHelper');
 const client = createClient();
 
 describe('Example data source ', function () {

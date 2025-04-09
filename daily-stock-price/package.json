@@ -1,12 +1,12 @@
 {
   "private": true,
-  "name": "@infinite-automation/dailyStockPrice",
-  "version": "4.5.0-SNAPSHOT",
+  "name": "@radixiot/dailyStockPrice",
+  "version": "5.5.0-SNAPSHOT",
   "description": "Daily Stock Price data source, daily gets price of the configure stock symbols",
   "main": "web/angular/dailyStockPrice.js",
   "dependencies": {},
   "devDependencies": {
-    "@infinite-automation/mango-module-tools": "^2.7.2"
+    "@radixiot/mango-module-tools": "^2.7.3"
   },
   "scripts": {
     "webpack": "webpack --config webpack.config.js"
@@ -15,9 +15,9 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MangoAutomation/ma-modules-contrib.git"
+    "url": "https://github.com/RadixIoT/ma-modules-contrib.git"
   },
-  "com_infiniteautomation": {
+  "com_radixiot": {
     "moduleName": "dailyStockPrice"
   }
 }

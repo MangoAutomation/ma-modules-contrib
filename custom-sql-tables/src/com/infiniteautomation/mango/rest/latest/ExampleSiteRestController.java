@@ -10,8 +10,6 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jooq.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.infiniteautomation.mango.example.sqlTables.vo.ExampleSiteVO;
 import com.infiniteautomation.mango.rest.latest.model.ExampleSiteModel;
 import com.infiniteautomation.mango.rest.latest.model.ExampleSiteModelMapping;
+import com.infiniteautomation.mango.rest.latest.model.ListWithTotal;
 import com.infiniteautomation.mango.rest.latest.model.RestModelMapper;
 import com.infiniteautomation.mango.rest.latest.model.StreamedArrayWithTotal;
 import com.infiniteautomation.mango.rest.latest.model.StreamedVORqlQueryWithTotal;
@@ -37,12 +36,16 @@ import com.infiniteautomation.mango.spring.service.ExampleSiteService;
 import com.infiniteautomation.mango.util.RQLUtils;
 import com.serotonin.m2m2.vo.permission.PermissionHolder;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import net.jazdw.rql.parser.ASTNode;
 
-@Api(value="Example Sites")
+@Tag(name="Example Sites")
 @RestController()
 @RequestMapping("/example-sites")
 public class ExampleSiteRestController {
@@ -60,25 +63,30 @@ public class ExampleSiteRestController {
         this.mapper = mapper;
     }
 
-    @ApiOperation(
-            value = "Get by XID",
-            notes = "Only items that user has read permission to are returned"
+    /**
+     * For Swagger documentation use only.
+     */
+    private interface ExampleSiteQueryResponse extends ListWithTotal<ExampleSiteModel> {
+    }
+
+    @Operation(
+            summary = "Get by XID",
+            description = "Only items that user has read permission to are returned"
     )
     @RequestMapping(method = RequestMethod.GET, value = "/{xid}")
     public ExampleSiteModel get(
-            @ApiParam(value = "Valid XID", required = true, allowMultiple = false)
+            @Parameter(description = "Valid XID", required = true)
             @PathVariable String xid,
             @AuthenticationPrincipal PermissionHolder user) {
         return mapping.map(service.get(xid), user, mapper);
     }
 
-    @ApiOperation(
-            value = "Query",
-            notes = "Use RQL formatted query",
-            response=ExampleSiteModel.class,
-            responseContainer="List"
+    @Operation(
+            summary = "Query",
+            description = "Use RQL formatted query"
     )
     @RequestMapping(method = RequestMethod.GET)
+    @ApiResponse(content = @Content(schema = @Schema(implementation = ExampleSiteQueryResponse.class)))
     public StreamedArrayWithTotal queryRQL(
             HttpServletRequest request,
             @AuthenticationPrincipal PermissionHolder user) {
@@ -88,10 +96,10 @@ public class ExampleSiteRestController {
         return new StreamedVORqlQueryWithTotal<>(service, rql, null, fieldMap, null, item -> mapping.map(item, user, mapper));
     }
 
-    @ApiOperation(value = "Create a new site")
+    @Operation(summary = "Create a new site")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ExampleSiteModel> create(
-            @ApiParam(value = "Site model", required = true)
+            @Parameter(description = "Site model", required = true)
             @RequestBody(required=true) ExampleSiteModel model,
 
             @AuthenticationPrincipal PermissionHolder user,
@@ -106,12 +114,12 @@ public class ExampleSiteRestController {
         return new ResponseEntity<>(mapping.map(vo, user, mapper), headers, HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Update an existing item")
+    @Operation(summary = "Update an existing item")
     @RequestMapping(method = RequestMethod.PUT, value = "/{xid}")
     public ResponseEntity<ExampleSiteModel> update(
             @PathVariable String xid,
 
-            @ApiParam(value = "Updated equipment model", required = true)
+            @Parameter(description = "Updated equipment model", required = true)
             @RequestBody(required=true) ExampleSiteModel model,
 
             @AuthenticationPrincipal PermissionHolder user,
@@ -126,12 +134,12 @@ public class ExampleSiteRestController {
         return new ResponseEntity<>(mapping.map(vo, user, mapper), headers, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Partial update to an existing item")
+    @Operation(summary = "Partial update to an existing item")
     @RequestMapping(method = RequestMethod.PATCH, value = "/{xid}")
     public ResponseEntity<ExampleSiteModel> patch(
             @PathVariable String xid,
 
-            @ApiParam(value = "Updated equipment model", required = true)
+            @Parameter(description = "Updated equipment model", required = true)
             @PatchVORequestBody(
                     service=ExampleSiteService.class,
                     modelClass=ExampleSiteModel.class)
@@ -149,10 +157,10 @@ public class ExampleSiteRestController {
         return new ResponseEntity<>(mapping.map(vo, user, mapper), headers, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Delete")
+    @Operation(summary = "Delete")
     @RequestMapping(method = RequestMethod.DELETE, value = "/{xid}")
     public ExampleSiteModel delete(
-            @ApiParam(value = "Valid XID", required = true, allowMultiple = false)
+            @Parameter(description = "Valid XID", required = true)
             @PathVariable String xid,
             @AuthenticationPrincipal PermissionHolder user) {;
         return mapping.map(service.delete(xid), user, mapper);

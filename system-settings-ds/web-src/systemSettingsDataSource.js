@@ -67,13 +67,13 @@ const systemSettingsDataSourceModule = angular.module('maSystemSettingsDataSourc
     });
     maUiMenuProvider.registerMenuItems([
         {
-            name: 'ui.help.systemSettingsDataSource',
+            name: 'ui.helps.help.systemSettingsDataSource',
             url: '/system-settings-data-source',
             menuTr: 'systemSettings.datasource.description',
             template: dsHelpTemplate
         },
         {
-            name: 'ui.help.systemSettingsDataPoint',
+            name: 'ui.helps.help.systemSettingsDataPoint',
             url: '/system-settings-data-point',
             menuTr: 'systemSettings.datapoint.description',
             template: dpHelpTemplate
