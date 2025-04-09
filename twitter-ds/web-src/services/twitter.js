@@ -1,6 +1,5 @@
-/**
- * @copyright 2020 {@link http://RadixIot.com|Radix IoT} All rights reserved.
- * @author Pier Puccini
+/*
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 twitterFactory.$inject = ['$q', '$injector', '$http', 'maRestResource'];

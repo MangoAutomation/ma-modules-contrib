@@ -1,37 +1,23 @@
-/**
- * Copyright (C) 2021 Radix IoT LLC. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
 const testHelper = require('@infinite-automation/mango-module-tools/test-helper/testHelper');
 const {createClient, uuid, assertValidationErrors, login} = testHelper;
-
 const client = createClient();
-const DataSource = client.DataSource;
-const DataPoint = client.DataPoint;
+const { DataSource, DataPoint } = client;
 
-describe('Twitter data source', function() {
-    before('Login', function() { return login.call(this, client); });
-     
+describe('Twitter data source', function () {
+    before('Login', function () {
+        return login.call(this, client);
+    });
+
     it('Create data source', () => {
         const ds = newDataSource();
         const local = Object.assign({}, ds);
-        debugger;
         return ds.save().then(saved => {
-            debugger;
             testHelper.assertDataSource(saved, local, assertDataSourceAttributes);
-        }, error => {debugger;
+        }, error => {
             assertValidationErrors([''], error);
         }).finally(() => {
             return ds.delete();
@@ -53,7 +39,7 @@ describe('Twitter data source', function() {
             //add additional fields and modify them
             const localUpdate = Object.assign({}, saved);
             return saved.save().then(updated => {
-                testHelper.assertDataSource(updated, localUpdate, assertDataSourceAttributes); 
+                testHelper.assertDataSource(updated, localUpdate, assertDataSourceAttributes);
             });
         }, error => {
             assertValidationErrors([''], error);
@@ -61,21 +47,21 @@ describe('Twitter data source', function() {
             return ds.delete();
         });
     });
-    
+
     it('Delete data source', () => {
         const ds = newDataSource();
         return ds.save().then(saved => {
             testHelper.assertDataSource(ds, saved, assertDataSourceAttributes);
             return ds.delete().then(() => {
-               return DataSource.get(saved.xid).then(notFound => {
-                   assert.fail('Should not have found ds ' + notFound.xid);
-               }, error => {
-                   assert.strictEqual(404, error.status);
-               }); 
+                return DataSource.get(saved.xid).then(notFound => {
+                    assert.fail('Should not have found ds ' + notFound.xid);
+                }, error => {
+                    assert.strictEqual(404, error.status);
+                });
             });
         });
     });
-    
+
     it('Create data point', () => {
         const ds = newDataSource();
         return ds.save().then(saved => {
@@ -90,7 +76,7 @@ describe('Twitter data source', function() {
             return ds.delete();
         });
     });
-    
+
     it('Update data point', () => {
         const ds = newDataSource();
         return ds.save().then(saved => {
@@ -99,7 +85,7 @@ describe('Twitter data source', function() {
             const local = Object.assign({}, dp);
             return dp.save().then(saved => {
                 testHelper.assertDataPoint(saved, local, assertPointLocator);
-                saved.pointLocator.tweetFilter = ['#1','#2'];
+                saved.pointLocator.tweetFilter = ['#1', '#2'];
                 const localUpdate = Object.assign({}, saved);
                 return saved.save().then(updated => {
                     return DataPoint.get(updated.xid).then(found => {
@@ -111,7 +97,7 @@ describe('Twitter data source', function() {
             return ds.delete();
         });
     });
-    
+
     it('Delete data point', () => {
         const ds = newDataSource();
         return ds.save().then(saved => {
@@ -124,14 +110,14 @@ describe('Twitter data source', function() {
                         assert.fail('Should not have found point ' + notFound.xid);
                     }, error => {
                         assert.strictEqual(404, error.status);
-                    }); 
+                    });
                 });
             });
         }).finally(() => {
             return ds.delete();
         });
     });
-    
+
     function newDataPoint(dsXid) {
         return new DataPoint({
             dataSourceXid: dsXid,
@@ -139,10 +125,11 @@ describe('Twitter data source', function() {
                 dataType: 'ALPHANUMERIC',
                 settable: true,
                 modelType: 'PL.TWITTER',
-                tweetFilter: ['#one','#two']
+                tweetFilter: ['#one', '#two']
             }
         });
     }
+
     function newDataSource() {
         return new DataSource({
             pollPeriod: {
@@ -156,18 +143,12 @@ describe('Twitter data source', function() {
                 {
                     eventType: 'POLL_ABORTED',
                     level: 'INFORMATION',
-                 },
-                 {
-                     eventType: 'TWITTER_API_FAILURE',
-                     level: 'URGENT',
-                 }
+                },
+                {
+                    eventType: 'TWITTER_API_FAILURE',
+                    level: 'URGENT',
+                }
             ],
-            pollPeriod: {
-                periods: 5,
-                type: 'SECONDS'
-            },
-            quantize: false,
-            useCron: false,
             polling: true,
             consumerKey: 'dummy',
             consumerSecret: 'dummy',
@@ -176,7 +157,7 @@ describe('Twitter data source', function() {
             modelType: 'TWITTER_DS'
         });
     }
-    
+
     function assertDataSourceAttributes(saved, local) {
         assert.strictEqual(saved.polling, local.polling);
         assert.strictEqual(saved.pollPeriod.periods, local.pollPeriod.periods);
@@ -189,12 +170,12 @@ describe('Twitter data source', function() {
         assert.strictEqual(saved.token, local.token);
         assert.strictEqual(saved.secret, local.secret);
     }
-    
+
     function assertPointLocator(saved, local) {
         assert.strictEqual(saved.dataType, local.dataType);
         assert.isArray(saved.tweetFilter);
         assert.strictEqual(saved.tweetFilter.length, local.tweetFilter.length);
-        for(var i=0; i<saved.tweetFilter.length; i++){
+        for (let i = 0; i < saved.tweetFilter.length; i++) {
             assert.strictEqual(saved.tweetFilter[i], local.tweetFilter[i]);
         }
     }

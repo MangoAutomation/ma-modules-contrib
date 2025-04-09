@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2019  Terry Packer. All rights reserved.
+/*
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 package com.infiniteautomation.mango.systemSettings;
 

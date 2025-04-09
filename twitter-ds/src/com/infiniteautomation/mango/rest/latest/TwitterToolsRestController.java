@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2021 RadixIot LLC. All rights reserved.
+ * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
-
 package com.infiniteautomation.mango.rest.latest;
 
 import java.util.List;

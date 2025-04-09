@@ -2,17 +2,17 @@
  * Copyright (C) 2025 Radix IoT LLC. All rights reserved.
  */
 
-const {login, createClient} = require('@infinite-automation/mango-module-tools/test-helper/testHelper');
+const {createClient, login} = require('@infinite-automation/mango-module-tools/test-helper/testHelper');
 const client = createClient();
 
-describe('Daily Stock Price data source ', function () {
+describe('Currency converter data source ', function () {
     before('Login', function () {
         return login.call(this, client);
     });
 
     const ds = {
-        xid: 'DS_DSP_TEST',
-        name: 'DSP Test',
+        xid: 'DS_EX_TEST',
+        name: 'Example Test',
         enabled: false,
         eventAlarmLevels: [
             {
@@ -32,7 +32,7 @@ describe('Daily Stock Price data source ', function () {
             periods: 5,
             type: 'SECONDS'
         },
-        modelType: 'DAILY_STOCK_PRICE'
+        modelType: 'EXAMPLE_POLLING'
     };
 
     it('Create data source', () => {
@@ -51,7 +51,7 @@ describe('Daily Stock Price data source ', function () {
     });
 
     it('Update data source', () => {
-        ds.name = 'DSP Test again';
+        ds.name = 'Test again';
         return client.restRequest({
             path: `/rest/latest/data-sources/${ds.xid}`,
             method: 'PUT',
