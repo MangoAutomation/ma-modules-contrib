@@ -28,17 +28,17 @@ public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest
     }
 
     @Override
-    ExampleSiteService getService() {
+    protected ExampleSiteService getService() {
         return Common.getBean(ExampleSiteService.class);
     }
 
     @Override
-    ExampleSiteDao getDao() {
+    protected ExampleSiteDao getDao() {
         return Common.getBean(ExampleSiteDao.class);
     }
 
     @Override
-    void assertVoEqual(ExampleSiteVO expected, ExampleSiteVO actual) {
+    protected void assertVoEqual(ExampleSiteVO expected, ExampleSiteVO actual) {
         Assert.assertEquals(expected.getId(), actual.getId());
         Assert.assertEquals(expected.getXid(), actual.getXid());
         Assert.assertEquals(expected.getReadPermission(), actual.getReadPermission());
@@ -46,7 +46,7 @@ public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest
     }
 
     @Override
-    ExampleSiteVO newVO(User owner) {
+    protected ExampleSiteVO newVO(User owner) {
         ExampleSiteVO vo = new ExampleSiteVO();
         vo.setName("Test site");
         vo.setReadPermission(new MangoPermission());
@@ -56,7 +56,7 @@ public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest
     }
 
     @Override
-    ExampleSiteVO updateVO(ExampleSiteVO vo) {
+    protected ExampleSiteVO updateVO(ExampleSiteVO vo) {
         vo.setName("Test site1");
         vo.setReadPermission(new MangoPermission());
         vo.setEditPermission(new MangoPermission());
@@ -65,27 +65,27 @@ public class ExampleSiteServiceTest extends AbstractVOServiceWithPermissionsTest
     }
 
     @Override
-    String getCreatePermissionType() {
+    protected String getCreatePermissionType() {
         return ExampleSiteCreatePermission.PERMISSION;
     }
 
     @Override
-    void setReadPermission(MangoPermission permission, ExampleSiteVO vo) {
+    protected void setReadPermission(MangoPermission permission, ExampleSiteVO vo) {
         vo.setReadPermission(permission);
     }
 
     @Override
-    String getReadPermissionContextKey() {
+    protected String getReadPermissionContextKey() {
         return "readPermission";
     }
 
     @Override
-    void setEditPermission(MangoPermission permission, ExampleSiteVO vo) {
+    protected void setEditPermission(MangoPermission permission, ExampleSiteVO vo) {
         vo.setEditPermission(permission);
     }
 
     @Override
-    String getEditPermissionContextKey() {
+    protected String getEditPermissionContextKey() {
         return "editPermission";
     }
 
