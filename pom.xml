@@ -47,12 +47,6 @@
     </modules>
     <repositories>
         <!--ma-shared-->
-        <repository>
-            <id>ias-releases</id>
-            <url>https://maven.mangoautomation.net/repository/ias-release/</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>false</enabled></snapshots>
-        </repository>
         <!--mango-parent-->
         <!--modules-parent-->
         <!--mango-->
@@ -61,25 +55,31 @@
         <!--grpc-web-parent-->
         <!--grpc-web-proxy-->
         <repository>
-            <id>github-radixiot</id>
-            <url>https://maven.pkg.github.com/radixiot/maven</url>
+            <id>radixiot-core-public</id>
+            <url>https://maven.radixiot.run/core-public</url>
             <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+        <repository>
+            <id>github</id>
+            <url>https://disabled.example.com</url>
+            <releases><enabled>false</enabled></releases>
             <snapshots><enabled>false</enabled></snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
         <!--mango-jooq-maven-plugin-->
+        <!--assembly-descriptors-->
         <pluginRepository>
-            <id>ias-releases</id>
-            <url>https://maven.mangoautomation.net/repository/ias-release/</url>
+            <id>radixiot-core-public</id>
+            <url>https://maven.radixiot.run/core-public</url>
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
-        <!--assembly-descriptors-->
         <pluginRepository>
-            <id>github-radixiot</id>
-            <url>https://maven.pkg.github.com/radixiot/maven</url>
-            <releases><enabled>true</enabled></releases>
+            <id>github</id>
+            <url>https://disabled.example.com</url>
+            <releases><enabled>false</enabled></releases>
             <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
